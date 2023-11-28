@@ -12,23 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tbmahasiswabaru', function (Blueprint $table) {
-            $table->id();
-            $table->primary('id_');
-            // `id_pendaftar` varchar(5) NOT NULL,
-            // `nama` varchar(30) NOT NULL,
-            // `ttl` varchar(50) NOT NULL,
-            // `alamat` text NOT NULL,
-            // `kota` varchar(20) NOT NULL,
-            // `telp` varchar(12) NOT NULL,
-            // `kdpos` varchar(5) NOT NULL,
-            // `Handphone` varchar(13) NOT NULL,
-            // `prodi` varchar(2) NOT NULL,
-            // `ttd` longtext NOT NULL,
-            // `nm_saksi1` longtext NOT NULL,
-            // `ttd_saksi1` longtext NOT NULL,
-            // `nm_saksi2` longtext NOT NULL,
-            // `ttd_saksi2` longtext NOT NULL,
-            // `photo` longtext NOT NULL,
+            $table->string('id_pendaftar',5);
+            $table->primary('id_pendaftar');
+            $table->string('nama');
+            $table->string('ttl');
+            $table->string('alamat');
+            $table->string('kota');
+            $table->string('tlp');
+            $table->string('kdpos');
+            $table->string('Handphone');
+            $table->string('prodi');
+            $table->string('ttd');
+            $table->string('nm_saksi1');
+            $table->string('ttd_saksi1');
+            $table->string('nm_saksi2');
+            $table->string('ttd_saksi2');
+            $table->string('photo');
             $table->timestamps();
         });
     }
