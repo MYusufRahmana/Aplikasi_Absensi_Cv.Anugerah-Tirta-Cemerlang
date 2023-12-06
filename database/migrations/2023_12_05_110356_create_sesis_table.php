@@ -9,20 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('absen', function (Blueprint $table) {
-            $table->integer('id');
-            $table->primary('id');
+        Schema::create('sesi', function (Blueprint $table) {
+            $table->integer('id_sesi');
+            $table->primary('id_sesi');
             $table->unsignedBigInteger('user_id');
-            $table->date('tanggal_absen');
-            $table->datetime('waktu_scan')->nullable();
-            $table->string('hasil_scan', 255);
-            $table->text('keterangan')->nullable();
-            $table->timestamps();
-
-            // Kunci asing ke tabel register
             $table->foreign('user_id')->references('no')->on('registers')->onDelete('cascade');
+            $table->unsignedBigInteger('id_kelas');
+            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade');
+            $table->integer('batas_jadwal');
+            $table->timestamps();
+           
+           
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absens');
+        Schema::dropIfExists('sesis');
     }
 };

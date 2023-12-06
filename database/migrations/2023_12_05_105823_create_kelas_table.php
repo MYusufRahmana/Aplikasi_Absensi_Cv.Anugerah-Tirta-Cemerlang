@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_hari', function (Blueprint $table) {
-            $table->integer('id');
-            $table->primary('id');
-            $table->string('Hari');
+        Schema::create('kelas', function (Blueprint $table) {
+            $table->integer('id_kelas');
+            $table->primary('id_kelas');
+            $table->string('nama_kelas');
+            $table->integer('gaji_pelatih');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('haris');
+        Schema::dropIfExists('kelas');
     }
 };

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_jadwal', function (Blueprint $table) {
+        Schema::create('jadwal', function (Blueprint $table) {
             $table->string('Id_Jadwal');
-            $table->primary('Id_Jadwal');
+            $table->primary('Id_Jadwal');            
             $table->date('Tanggal');
             $table->date('Waktu');
             $table->date('Waktu_Selesai');
