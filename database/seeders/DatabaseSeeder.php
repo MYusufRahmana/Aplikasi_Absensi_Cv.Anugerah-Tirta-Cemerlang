@@ -36,5 +36,35 @@ class DatabaseSeeder extends Seeder
             'status' => '1',
             'password' => bcrypt('password'),
         ]);
+        DB::table('t_pelatih')->insert([
+            'kode_pelatih' => '0001',
+            'Nama_pelatih' => 'Pelatih 1',
+            'HP' => 'samsung',
+            'Telp' => '081277788',
+            'Email' => 'pelatih1@gmail.com',
+            'Alamat' => 'jln harapan 1',
+            'Username' => 'Pelatih1',
+        ]);
+        DB::table('kelas')->insert([
+            'id_kelas' => '001',
+            'nama_kelas' => 'reguler',
+            'gaji_pelatih' => '50000',
+            
+        ]);
+        DB::table('sesi')->insert([
+            'id_sesi' => '000001',
+            'user_id' => '1',
+            'id_kelas' => '001',
+            'batas_jadwal' => '12'
+    
+        ]);
+        DB::table('jadwal')->insert([
+            'id_jadwal' => '000001',
+            'id_sesi' => '000001',
+            'kode_pelatih' => '0001',
+            'waktu_mulai' => now(),
+            'waktu_selesai' => now()->addHours(1)
+    
+        ]);
     }
 }

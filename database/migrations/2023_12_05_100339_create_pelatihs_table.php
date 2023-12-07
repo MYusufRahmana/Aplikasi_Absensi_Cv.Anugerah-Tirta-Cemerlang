@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_bendahara_ukm', function (Blueprint $table) {
-            $table->string('Id_Bendahara');
-            $table->primary('Id_Bendahara');
-            $table->string('NPM');
-            $table->string('Nama');
+        Schema::create('t_pelatih', function (Blueprint $table) {
+            $table->unsignedInteger('kode_pelatih');
+            $table->primary('kode_pelatih');
+            $table->string('Nama_Pelatih');
             $table->string('HP');
+            $table->string('Telp');
             $table->string('Email');
-            $table->string('ID_UKM');
-            $table->string('Tahun');
-            $table->enum('Semester', ['Ganjil', 'Genap']);
+            $table->string('Alamat');
+            $table->string('Username');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bendaharas');
+        Schema::dropIfExists('pelatihs');
     }
 };

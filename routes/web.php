@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('mainmenu');
+})->middleware(['auth', 'verified'])->name('mainmenu');
 
 Route::middleware('auth')->group(function () {
     Route::resource('absen',AbsenController::class);
@@ -29,10 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
-Route::get('/dashboard', function () {
-    return view('mainmenu');
+
+Route::get('/mainmenu', function () {
+    return view('mainmenu')->name('mainmenu');
 });
 
 require __DIR__ .'/auth.php';
