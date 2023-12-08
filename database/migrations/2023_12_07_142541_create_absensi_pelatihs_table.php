@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_absensi_pelatih', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_absensi_pelatih');
-            $table->primary('id_absensi_pelatih');
-            $table->unsignedBigInteger('id_jadwal');
-            $table->datetime('waktu_absen');
-            $table->string('hasil');
-            $table->string('status');
-            $table->string('keterangan');
-            $table->timestamps();
+        // Schema::create('t_absensi_pelatih', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_absensi_pelatih');
+        //     $table->primary('id_absensi_pelatih');
+        //     $table->unsignedBigInteger('id_jadwal');
+        //     $table->datetime('waktu_absen');
+        //     $table->string('hasil');
+        //     $table->string('status');
+        //     $table->string('keterangan');
+        //     $table->timestamps();
 
-            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal')->onDelete('cascade');
+        //     $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal')->onDelete('cascade');
             
-        });
+        // });
     }
 
     /**

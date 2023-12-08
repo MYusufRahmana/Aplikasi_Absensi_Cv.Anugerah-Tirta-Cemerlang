@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\AbsensiMemberController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Models\absen;
+use App\Models\absensi_member;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('mainmenu');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('absen',AbsenController::class);
+    Route::resource('absen',AbsensiMemberController::class);
     Route::resource('home',HomeController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

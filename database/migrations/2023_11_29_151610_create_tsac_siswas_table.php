@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tsac_siswa', function (Blueprint $table) {
-            $table->integer('id');
+            $table->unsignedBigInteger('id');
             $table->primary('id');
-            $table->integer('id_registrasi');
+            $table->unsignedBigInteger('id_registrasi');
             $table->date('tgl_masuk');
             $table->string('status');
             $table->timestamp('validation_time');
             $table->string('validation_by');
+            $table->foreign('id_registrasi')->references('no')->on('register')->cascadeOnDelete()->cascadeOnUpdate();
+
         });
     }
 

@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absen;
-use App\Http\Requests\StoreabsenRequest;
-use App\Http\Requests\UpdateabsenRequest;
+use App\Models\tsac_siswa_kelas;
+use Illuminate\Http\Request;
 
-class AbsenController extends Controller
+class TsacSiswaKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $absensi = absen::all();
-        // return view('absen.index',compact('absensi'));
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class AbsenController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreabsenRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -36,7 +34,7 @@ class AbsenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(absen $absen)
+    public function show(tsac_siswa_kelas $tsac_siswa_kelas)
     {
         //
     }
@@ -44,7 +42,7 @@ class AbsenController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(absen $absen)
+    public function edit(tsac_siswa_kelas $tsac_siswa_kelas)
     {
         //
     }
@@ -52,7 +50,7 @@ class AbsenController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateabsenRequest $request, absen $absen)
+    public function update(Request $request, tsac_siswa_kelas $tsac_siswa_kelas)
     {
         //
     }
@@ -60,7 +58,7 @@ class AbsenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(absen $absen)
+    public function destroy(tsac_siswa_kelas $tsac_siswa_kelas)
     {
         //
     }

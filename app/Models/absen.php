@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class absen extends Model
 {
-    use HasFactory;
-    protected $table = 'absen'; // Ganti dengan nama tabel yang sesuai
-    protected $fillable = ['id', 'user_id', 'tanggal_absen', 'waktu_scan', 'keterangan'];
+    // use HasFactory;
+    // protected $table = 'absen'; // Ganti dengan nama tabel yang sesuai
+    // protected $fillable = ['id', 'user_id', 'tanggal_absen', 'waktu_scan', 'keterangan'];
 }

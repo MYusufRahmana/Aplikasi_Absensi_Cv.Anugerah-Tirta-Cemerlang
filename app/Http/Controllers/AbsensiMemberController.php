@@ -13,7 +13,8 @@ class AbsensiMemberController extends Controller
      */
     public function index()
     {
-        //
+        $absensi = absensi_member::all();
+        return view('absen.index',compact('absensi'));
     }
 
     /**
@@ -29,7 +30,7 @@ class AbsensiMemberController extends Controller
      */
     public function store(Storeabsensi_memberRequest $request)
     {
-        //
+        
     }
 
     /**

@@ -45,26 +45,26 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'jln harapan 1',
             'Username' => 'Pelatih1',
         ]);
-        DB::table('kelas')->insert([
-            'id_kelas' => '001',
-            'nama_kelas' => 'reguler',
-            'gaji_pelatih' => '50000',
+        // DB::table('kelas')->insert([
+        //     'id_kelas' => '001',
+        //     'nama_kelas' => 'reguler',
+        //     'gaji_pelatih' => '50000',
             
-        ]);
-        DB::table('sesi')->insert([
-            'id_sesi' => '000001',
-            'user_id' => '1',
-            'id_kelas' => '001',
-            'batas_jadwal' => '12'
+        // ]);
+        // DB::table('sesi')->insert([
+        //     'id_sesi' => '000001',
+        //     'user_id' => '1',
+        //     'id_kelas' => '001',
+        //     'batas_jadwal' => '12'
     
-        ]);
-        DB::table('jadwal')->insert([
-            'id_jadwal' => '000001',
-            'id_sesi' => '000001',
-            'kode_pelatih' => '0001',
-            'waktu_mulai' => now(),
-            'waktu_selesai' => now()->addHours(1)
+        // ]);
+        // DB::table('jadwal')->insert([
+        //     'id_jadwal' => '000001',
+        //     'id_sesi' => '000001',
+        //     'kode_pelatih' => '0001',
+        //     'waktu_mulai' => now(),
+        //     'waktu_selesai' => now()->addHours(1)
     
-        ]);
+        // ]);
     }
 }

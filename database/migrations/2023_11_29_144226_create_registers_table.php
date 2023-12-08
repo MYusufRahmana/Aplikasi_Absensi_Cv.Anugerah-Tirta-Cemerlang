@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('registers', function (Blueprint $table) {
-            $table->bigIncrements('no');
+        Schema::create('register', function (Blueprint $table) {
+            $table->unsignedBigInteger('no');
+            $table->primary('no');
             $table->string('Nama');
             $table->string('Gender');
             $table->string('Sekolah');
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('gbr');
             $table->timestamps();
             $table->string('password');
-            $table->integer('status');
+            $table->unsignedBigInteger('status');
 
         });
     }

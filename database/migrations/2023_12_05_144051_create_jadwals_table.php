@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_jadwal');
-            $table->primary('id_jadwal');
-            $table->unsignedBigInteger('id_sesi');
-            $table->unsignedBigInteger('kode_pelatih');
-            $table->datetime('waktu_mulai');
-            $table->datetime('waktu_selesai');
-            $table->timestamps();
+        // Schema::create('jadwal', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_jadwal');
+        //     $table->primary('id_jadwal');
+        //     $table->unsignedBigInteger('id_sesi');
+        //     $table->unsignedBigInteger('kode_pelatih');
+        //     $table->datetime('waktu_mulai');
+        //     $table->datetime('waktu_selesai');
+        //     $table->timestamps();
 
-            // Kunci asing ke tabel register
-            $table->foreign('id_sesi')->references('id_sesi')->on('sesi')->onDelete('cascade');
-            $table->foreign('kode_pelatih')->references('kode_pelatih')->on('t_pelatih')->onDelete('cascade');
-        });
+        //     // Kunci asing ke tabel register
+        //     $table->foreign('id_sesi')->references('id_sesi')->on('sesi')->onDelete('cascade');
+        //     $table->foreign('kode_pelatih')->references('kode_pelatih')->on('t_pelatih')->onDelete('cascade');
+        // });
     }
 
     /**

@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensi_member', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_absensi_member');
-            $table->primary('id_absensi_member');
-            $table->unsignedBigInteger('id_jadwal');
-            $table->datetime('waktu_absen');
-            $table->string('hasil');
-            $table->string('status');
-            $table->string('keterangan');
-            $table->timestamps();
+        // Schema::create('absensi_member', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_absensi_member');
+        //     $table->primary('id_absensi_member');
+        //     $table->unsignedBigInteger('id_jadwal');
+        //     $table->datetime('waktu_absen');
+        //     $table->string('hasil');
+        //     $table->string('status');
+        //     $table->string('keterangan');
+        //     $table->timestamps();
 
-            // Kunci asing ke tabel register
-            $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal')->onDelete('cascade');
-        });
+        //     // Kunci asing ke tabel register
+        //     $table->foreign('id_jadwal')->references('id_jadwal')->on('jadwal')->onDelete('cascade');
+        // });
         
     }
 

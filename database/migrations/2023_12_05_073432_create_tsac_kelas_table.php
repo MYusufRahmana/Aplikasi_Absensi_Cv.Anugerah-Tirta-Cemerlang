@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('kelas', function (Blueprint $table) {
-        //     $table->unsignedInteger('id_kelas');
-        //     $table->primary('id_kelas');
-        //     $table->string('nama_kelas');
-        //     $table->integer('gaji_pelatih');
-        //     $table->timestamps();
-        // });
+        Schema::create('tsac_kelas', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->primary('id');
+            $table->string('nama');
+            $table->string('deskripsi');
+            $table->integer('status');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kelas');
+        Schema::dropIfExists('tsac_kelas');
     }
 };
