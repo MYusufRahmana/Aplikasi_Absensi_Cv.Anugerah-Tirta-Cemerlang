@@ -35,7 +35,8 @@
             background-color: #fff;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
@@ -110,48 +111,50 @@
 
 <body>
     <h2>Pertemuan</h2>
+        {{-- @if (Session::has('success'))
+                <h1>{{ Session::get('success') }}</h1>
+        @endif --}}
     <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
 
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
                 <th>Waktu</th>
-                <th>Hasil</th>
                 <th>Status</th>
-                <th>Keterangan</th>
             </tr>
         </thead>
         <tbody id="presensiTable">
-            @foreach($absensi as $absen)
+            @foreach($absensi as $absensi_member)
             <tr>
-                
-                <td>{{ $absensi_member->waktu }}</td>
-                <td>{{ $absensi_member->hasil }}</td>
+
+                <td>{{ $absensi_member->waktu_absen }}</td>
                 <td>{{ $absensi_member->status }}</td>
-                <td>{{ $absensi_member->keterangan }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
     <!-- Form presensi mandiri -->
-    <div class="presensi-form" id="presensiForm">
-        <div class="form-content">
-            <span class="close-btn" onclick="closePresensiForm()">&times;</span>
-            <h3 class="text-center">Form Presensi Mandiri</h3>
-            <div class="radio-group">
-                <div class="radio-label">
-                    <input type="radio" id="hadir" name="presensi" value="hadir" required>
-                    <label for="hadir">Hadir</label>
+    <form action="{{route('absen.store')}}" method="post">
+        @csrf
+        <div class="presensi-form" id="presensiForm">
+            <div class="form-content">
+                <span class="close-btn" onclick="closePresensiForm()">&times;</span>
+                <h3 class="text-center">Form Presensi Mandiri</h3>
+                <div class="radio-group">
+                    <div class="radio-label">
+                        <input type="radio" id="hadir" name="status" value="hadir" required>
+                        <label for="hadir">Hadir</label>
+                    </div>
+                    <div class="radio-label">
+                        <input type="radio" id="izin" name="status" value="izin" required>
+                        <label for="tidakHadir">Izin</label>
+                    </div>
                 </div>
-                <div class="radio-label">
-                    <input type="radio" id="tidakHadir" name="presensi" value="tidak_hadir" required>
-                    <label for="tidakHadir">Tidak Hadir</label>
-                </div>
+                <button class="submit-btn" type="submit">Submit</button>
             </div>
-            <button class="submit-btn" type="submit" onclick="submitPresensi()">Submit</button>
         </div>
-    </div>
+    </form>
 
     <script>
         function openPresensiForm() {
@@ -162,33 +165,8 @@
             document.getElementById('presensiForm').style.display = 'none';
         }
 
-        function submitPresensi() {
-            var nama = "Nama Pengguna"; // Ganti dengan cara mengambil nilai nama pengguna dari formulir
-            var tanggalAbsen = "Tanggal Pengguna"; // Ganti dengan cara mengambil nilai tanggal absen dari formulir
-            var jamScan = "Jam Pengguna"; // Ganti dengan cara mengambil nilai jam scan dari formulir
-            var status = document.querySelector('input[name="presensi"]:checked').value; // Mengambil nilai status dari formulir
 
-            // Menambahkan data ke tabel
-            var table = document.getElementById('presensiTable');
-            var rowCount = table.rows.length;
-
-            var row = table.insertRow(rowCount);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-
-            cell1.innerHTML = nama;
-            cell2.innerHTML = tanggalAbsen;
-            cell3.innerHTML = jamScan;
-            cell4.innerHTML = status;
-            cell5.innerHTML = "Keterangan Pengguna";
-
-            // Menutup formulir
-            closePresensiForm();
-        }
-
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             if (event.target === document.getElementById('presensiForm')) {
                 closePresensiForm();
             }

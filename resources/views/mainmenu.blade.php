@@ -116,6 +116,7 @@
           </div>
         </div>
         @yield('content')
+        <!-- {{dd(Session::get('email'))}} -->
         <div class="row">
         </div>
         <br />

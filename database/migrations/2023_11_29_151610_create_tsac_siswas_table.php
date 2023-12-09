@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('status');
             $table->timestamp('validation_time');
             $table->string('validation_by');
-            $table->foreign('id_registrasi')->references('no')->on('register')->cascadeOnDelete()->cascadeOnUpdate();
 
         });
     }
