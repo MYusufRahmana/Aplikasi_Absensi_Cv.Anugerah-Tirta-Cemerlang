@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kelas', function (Blueprint $table) {
-            $table->unsignedInteger('id_kelas');
-            $table->primary('id_kelas');
-            $table->string('nama_kelas');
-            $table->integer('gaji_pelatih');
-            $table->timestamps();
-        });
+        // Schema::create('kelas', function (Blueprint $table) {
+        //     $table->unsignedInteger('id_kelas');
+        //     $table->primary('id_kelas');
+        //     $table->string('nama_kelas');
+        //     $table->integer('gaji_pelatih');
+        //     $table->timestamps();
+        // });
     }
 
     /**

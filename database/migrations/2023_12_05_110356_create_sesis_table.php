@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sesi', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_sesi');
-            $table->primary('id_sesi');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('no')->on('registers')->onDelete('cascade');
-            $table->unsignedInteger('id_kelas');
-            $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade');
-            $table->integer('batas_jadwal');
-            $table->timestamps();
+        // Schema::create('sesi', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_sesi');
+        //     $table->primary('id_sesi');
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->foreign('user_id')->references('no')->on('registers')->onDelete('cascade');
+        //     $table->unsignedInteger('id_kelas');
+        //     $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onDelete('cascade');
+        //     $table->integer('batas_jadwal');
+        //     $table->timestamps();
            
            
-        });
+        // });
     }
 
     /**

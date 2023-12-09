@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tsac_siswa', function (Blueprint $table) {
-            $table->integer('id');
+        Schema::create('tsac_kelas', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
             $table->primary('id');
-            $table->integer('id_registrasi');
-            $table->date('tgl_masuk');
-            $table->string('status');
-            $table->timestamp('validation_time');
-            $table->string('validation_by');
+            $table->string('nama');
+            $table->string('deskripsi');
+            $table->integer('status');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('siswas');
+        Schema::dropIfExists('tsac_kelas');
     }
 };

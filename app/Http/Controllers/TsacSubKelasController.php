@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_pelatih;
-use App\Http\Requests\Storeabsensi_pelatihRequest;
-use App\Http\Requests\Updateabsensi_pelatihRequest;
+use App\Models\tsac_sub_kelas;
+use Illuminate\Http\Request;
 
-class AbsensiPelatihController extends Controller
+class TsacSubKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -24,7 +26,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storeabsensi_pelatihRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -32,7 +34,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(absensi_pelatih $absensi_pelatih)
+    public function show(tsac_sub_kelas $tsac_sub_kelas)
     {
         //
     }
@@ -40,7 +42,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(absensi_pelatih $absensi_pelatih)
+    public function edit(tsac_sub_kelas $tsac_sub_kelas)
     {
         //
     }
@@ -48,7 +50,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updateabsensi_pelatihRequest $request, absensi_pelatih $absensi_pelatih)
+    public function update(Request $request, tsac_sub_kelas $tsac_sub_kelas)
     {
         //
     }
@@ -56,7 +58,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(absensi_pelatih $absensi_pelatih)
+    public function destroy(tsac_sub_kelas $tsac_sub_kelas)
     {
         //
     }

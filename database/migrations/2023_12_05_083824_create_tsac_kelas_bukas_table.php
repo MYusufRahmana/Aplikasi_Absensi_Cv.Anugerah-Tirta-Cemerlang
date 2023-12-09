@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensi_member', function (Blueprint $table) {
-            $table->increments('id_absensi_member');
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('no')->on('registers')->onDelete('cascade');
-            $table->datetime('waktu_absen');
+        Schema::create('tsac_kelas_buka', function (Blueprint $table) {
+            $table->unsignedBigInteger('id');
+            $table->primary('id');
+            $table->string('kode_kelas');
+            $table->integer('id_sub_kelas');
+            $table->integer('isi');
+            $table->integer('kapasitas');
+            $table->integer('created_by');
             $table->string('status');
             $table->timestamps();
-
-            // Kunci asing ke tabel register
         });
-        
     }
 
     /**
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensi_members');
+        Schema::dropIfExists('tsac_kelas_bukas');
     }
 };

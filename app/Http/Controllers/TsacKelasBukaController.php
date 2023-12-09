@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pengumuman;
-use App\Http\Requests\StorepengumumanRequest;
-use App\Http\Requests\UpdatepengumumanRequest;
+use App\Models\tsac_kelas_buka;
+use Illuminate\Http\Request;
 
-class PengumumanController extends Controller
+class TsacKelasBukaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class PengumumanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorepengumumanRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class PengumumanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(pengumuman $pengumuman)
+    public function show(tsac_kelas_buka $tsac_kelas_buka)
     {
         //
     }
@@ -43,7 +42,7 @@ class PengumumanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(pengumuman $pengumuman)
+    public function edit(tsac_kelas_buka $tsac_kelas_buka)
     {
         //
     }
@@ -51,7 +50,7 @@ class PengumumanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatepengumumanRequest $request, pengumuman $pengumuman)
+    public function update(Request $request, tsac_kelas_buka $tsac_kelas_buka)
     {
         //
     }
@@ -59,7 +58,7 @@ class PengumumanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pengumuman $pengumuman)
+    public function destroy(tsac_kelas_buka $tsac_kelas_buka)
     {
         //
     }

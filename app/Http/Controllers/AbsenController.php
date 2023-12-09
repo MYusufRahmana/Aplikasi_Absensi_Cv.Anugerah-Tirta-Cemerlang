@@ -13,8 +13,8 @@ class AbsenController extends Controller
      */
     public function index()
     {
-        $absensi = Absen::all();
-        return view('absen.index',compact('absensi'));
+        // $absen = Absen::all();
+        // return view('absen.index',compact('absensi'));
     }
 
     /**
