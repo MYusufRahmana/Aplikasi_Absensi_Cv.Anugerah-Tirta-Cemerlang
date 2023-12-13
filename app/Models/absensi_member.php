@@ -11,7 +11,7 @@ class absensi_member extends Model
     protected $table = 'absensi_member';
     protected $fillable = ['id_user','waktu_absen','status'];
 
-    // public function user() {
-    //     return User
-    // }
+    public function register() {
+        return $this->belongsTo(register::class,'id_user','no');
+    }
 }

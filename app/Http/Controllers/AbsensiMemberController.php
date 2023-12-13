@@ -43,7 +43,7 @@ class AbsensiMemberController extends Controller
              "waktu_absen" => now()->format('Y-m-d H:i:s')
         ]);
 
-        return redirect()->route('absen.index')->with('success', "Data Berhasil Dibuat");
+        return redirect()->route('absen.index')->with('success', "Data Berhasil Dibuat" );
     }
 
     /**

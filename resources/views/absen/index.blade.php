@@ -132,13 +132,29 @@
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
+                <th>Nama</th>
                 <th>Waktu</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody id="presensiTable">
+            <tr>
+                @if ($absensi->first()->register->Kelas=="1")
+                    Kelas Pemula - Reguler
+                @endif
+                @if ($absensi->first()->register->Kelas=="2")
+                    Kelas Pemula - Group
+                @endif
+                @if ($absensi->first()->register->Kelas=="3")
+                    Kelas Pemula - Private
+                @endif
+                @if ($absensi->first()->register->Kelas=="4")
+                    Jalur Prestasi
+                @endif
+            </tr>
             @foreach($absensi as $absensi_member)
             <tr>
+                <td>{{ ($absensi_member->register->Nama)}}</td>
                 <td>{{ date('d M Y H:i:s', strtotime($absensi_member->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_member->status == 'Hadir' ? '#4CAF50' : ($absensi_member->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $absensi_member->status }}</td>
             </tr>
