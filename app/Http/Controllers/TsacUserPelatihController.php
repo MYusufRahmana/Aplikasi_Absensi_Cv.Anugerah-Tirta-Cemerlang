@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ketua;
-use App\Http\Requests\StoreketuaRequest;
-use App\Http\Requests\UpdateketuaRequest;
+use App\Models\tsac_user_pelatih;
+use Illuminate\Http\Request;
 
-class KetuaController extends Controller
+class TsacUserPelatihController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class KetuaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreketuaRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class KetuaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ketua $ketua)
+    public function show(tsac_user_pelatih $tsac_user_pelatih)
     {
         //
     }
@@ -43,7 +42,7 @@ class KetuaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ketua $ketua)
+    public function edit(tsac_user_pelatih $tsac_user_pelatih)
     {
         //
     }
@@ -51,7 +50,7 @@ class KetuaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateketuaRequest $request, ketua $ketua)
+    public function update(Request $request, tsac_user_pelatih $tsac_user_pelatih)
     {
         //
     }
@@ -59,7 +58,7 @@ class KetuaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ketua $ketua)
+    public function destroy(tsac_user_pelatih $tsac_user_pelatih)
     {
         //
     }

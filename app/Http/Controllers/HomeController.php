@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Home;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -12,5 +11,8 @@ class HomeController extends Controller
         return view('mainmenu');
     }
 
-    
+    public function logout() {
+        Session::flush();
+        return redirect('/');
+    }
 }

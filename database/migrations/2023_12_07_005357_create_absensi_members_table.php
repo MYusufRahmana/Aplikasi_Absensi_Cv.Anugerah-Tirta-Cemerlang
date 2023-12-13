@@ -21,7 +21,7 @@ return new class extends Migration
 
             // Kunci asing ke tabel register
         });
-        
+
     }
 
     /**

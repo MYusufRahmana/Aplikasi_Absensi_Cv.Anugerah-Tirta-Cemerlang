@@ -9,7 +9,7 @@
     <title>Data Absen</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
@@ -23,9 +23,16 @@
         .add-btn {
             float: right;
             margin-bottom: 10px;
-            background-color: #808080;
-            border-color: #808080;
-            color: #fff;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #45a049;
         }
 
         table {
@@ -33,12 +40,13 @@
             border-collapse: collapse;
             margin-top: 20px;
             background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         th,
         td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: center;
         }
 
@@ -90,6 +98,10 @@
             cursor: pointer;
         }
 
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
         .radio-group {
             display: flex;
             justify-content: space-evenly;
@@ -105,30 +117,46 @@
             margin-right: 5px;
         }
     </style>
+
     <!-- Option 1: Include in HTML -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
 <body>
     <h2>Pertemuan</h2>
-        {{-- @if (Session::has('success'))
-                <h1>{{ Session::get('success') }}</h1>
-        @endif --}}
+    @if (Session::has('success'))
+    <h1>{{ Session::get('success') }}</h1>
+    @endif
     <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
 
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
+                <th>Nama</th>
                 <th>Waktu</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody id="presensiTable">
+            <tr>
+                @if ($absensi->first()->register->Kelas=="1")
+                    Kelas Pemula - Reguler
+                @endif
+                @if ($absensi->first()->register->Kelas=="2")
+                    Kelas Pemula - Group
+                @endif
+                @if ($absensi->first()->register->Kelas=="3")
+                    Kelas Pemula - Private
+                @endif
+                @if ($absensi->first()->register->Kelas=="4")
+                    Jalur Prestasi
+                @endif
+            </tr>
             @foreach($absensi as $absensi_member)
             <tr>
-
-                <td>{{ $absensi_member->waktu_absen }}</td>
-                <td>{{ $absensi_member->status }}</td>
+                <td>{{ ($absensi_member->register->Nama)}}</td>
+                <td>{{ date('d M Y H:i:s', strtotime($absensi_member->waktu_absen)) }}</td>
+                <td style="background-color: {{ $absensi_member->status == 'Hadir' ? '#4CAF50' : ($absensi_member->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $absensi_member->status }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -143,12 +171,12 @@
                 <h3 class="text-center">Form Presensi Mandiri</h3>
                 <div class="radio-group">
                     <div class="radio-label">
-                        <input type="radio" id="hadir" name="status" value="hadir" required>
+                        <input type="radio" id="hadir" name="status" value="Hadir" required>
                         <label for="hadir">Hadir</label>
                     </div>
                     <div class="radio-label">
-                        <input type="radio" id="izin" name="status" value="izin" required>
-                        <label for="tidakHadir">Izin</label>
+                        <input type="radio" id="izin" name="status" value="Izin" required>
+                        <label for="izin">Izin</label>
                     </div>
                 </div>
                 <button class="submit-btn" type="submit">Submit</button>
@@ -164,7 +192,6 @@
         function closePresensiForm() {
             document.getElementById('presensiForm').style.display = 'none';
         }
-
 
         window.onclick = function(event) {
             if (event.target === document.getElementById('presensiForm')) {

@@ -19,7 +19,7 @@
                 </li>
                 <li><a href="{{route('absen.index')}}"><i class="fa fa-desktop"></i> Absen </a>
                 </li>
-                <li><a><i class="fa fa-table"></i> Tables</a>
+                <li><a href="{{url('/laporan')}}"><i class="fa fa-table"></i> Laporan</a>
                 </li>
                 <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">

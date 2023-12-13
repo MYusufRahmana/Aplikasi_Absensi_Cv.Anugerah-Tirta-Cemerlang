@@ -30,19 +30,20 @@ class AbsensiMemberController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Storeabsensi_memberRequest $request)
-    {   
+    {
         $validate = $request ->validate([
             'status'=>'required',
             "keterangan" =>'string',
 
         ]);
+
         absensi_member::create([
             "status" =>$request->validate(['status'=>'required'])['status'],
              "id_user" =>auth()->user()->no,
-             "waktu_absen" => new DateTime()
+             "waktu_absen" => now()->format('Y-m-d H:i:s')
         ]);
 
-        return redirect()->route('absen.index')->with('success', "Data Berhasil Dibuat");
+        return redirect()->route('absen.index')->with('success', "Data Berhasil Dibuat" );
     }
 
     /**

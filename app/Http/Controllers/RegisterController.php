@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\register;
 use App\Http\Requests\StoreregisterRequest;
 use App\Http\Requests\UpdateregisterRequest;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -13,7 +14,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -62,5 +63,20 @@ class RegisterController extends Controller
     public function destroy(register $register)
     {
         //
+    }
+    public function showDashboard()
+    {
+        // Menghitung jumlah total member
+        $totalMembers = Register::count();
+
+        // Menghitung jumlah member yang memiliki status tertentu (misalnya status = 1)
+        $activeMembers = Register::where('status', 1)->count();
+
+        // Menghitung jumlah member laki-laki dan perempuan
+        $totalMales = Register::where('Gender', 'laki-laki')->count();
+        $totalFemales = Register::where('Gender', 'perempuan')->count();
+
+        // Kirim data ke tampilan 'mainmenu'
+        return view('mainmenu', compact('totalMembers', 'activeMembers', 'totalMales', 'totalFemales'));
     }
 }

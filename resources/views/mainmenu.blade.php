@@ -19,7 +19,6 @@
   <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
   <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-
   <!-- bootstrap-progressbar -->
   <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
   <!-- JQVMap -->
@@ -82,7 +81,7 @@
                     </a>
                   </li>
                   <li><a href="javascript:;">Help</a></li>
-                  <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="{{route('logout')}}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
             </ul>
@@ -95,28 +94,23 @@
       <div class="right_col" role="main">
       <div class="row tile_count">
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i> Total Member</span>
-            <div class="count">2500</div>
+            <span class="count_top"><i class="fa fa-user"></i> Jumlah Member</span>
+            <div class="count">{{DB::table('registers')->count()}}</div>
           </div>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i>Jumlah Pelatih</span>
-            <div class="count">123.50</div>
+            <span class="count_top"><i class="fa fa-user"></i> Jumlah Pelatih</span>
+            <div class="count">{{DB::table('t_pelatih')->count()}}</div>
           </div>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Laki-laki</span>
-            <div class="count green">2,500</div>
+            <div class="count green">{{$countMaleMembers = DB::table('registers')->where('gender', 'Laki-laki')->count()}}</div>
           </div>
           <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Perempuan</span>
-            <div class="count red">4,567</div>
-          </div>
-          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-            <span class="count_top"><i class="fa fa-user"></i>Member Aktif</span>
-            <div class="count">4,567</div>
+            <div class="count red">{{$countMaleMembers = DB::table('registers')->where('gender', 'Perempuan')->count()}}</div>
           </div>
         </div>
         @yield('content')
-        <!-- {{dd(Session::get('email'))}} -->
         <div class="row">
         </div>
         <br />

@@ -28,13 +28,28 @@ class DatabaseSeeder extends Seeder
             'Sekolah' => 'SMPN 1',
             'Health' => 'Sehat',
             'Tgl' => '2000-01-01',
-            'Kelas' => '7',
+            'Kelas' => '2',
             'Ortu' => 'Ayah',
             'Alamat' => 'Jl. Jalan',
             'Hp' => '081234567890',
             'gbr' => 'default.jpg',
             'status' => '1',
             'password' => bcrypt('password'),
+        ]);
+        DB::table('registers')->insert([
+            'nama' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'Gender' => 'Laki-laki',
+            'Sekolah' => 'SMPN 1',
+            'Health' => 'Sehat',
+            'Tgl' => '2000-01-01',
+            'Kelas' => '4',
+            'Ortu' => 'Ayah',
+            'Alamat' => 'Jl. Jalan',
+            'Hp' => '081234567890',
+            'gbr' => 'default.jpg',
+            'status' => '1',
+            'password' => bcrypt('admin'),
         ]);
         DB::table('t_pelatih')->insert([
             'kode_pelatih' => '0001',
@@ -49,14 +64,14 @@ class DatabaseSeeder extends Seeder
         //     'id_kelas' => '001',
         //     'nama_kelas' => 'reguler',
         //     'gaji_pelatih' => '50000',
-            
+
         // ]);
         // DB::table('sesi')->insert([
         //     'id_sesi' => '000001',
         //     'user_id' => '1',
         //     'id_kelas' => '001',
         //     'batas_jadwal' => '12'
-    
+
         // ]);
         // DB::table('jadwal')->insert([
         //     'id_jadwal' => '000001',
@@ -64,7 +79,7 @@ class DatabaseSeeder extends Seeder
         //     'kode_pelatih' => '0001',
         //     'waktu_mulai' => now(),
         //     'waktu_selesai' => now()->addHours(1)
-    
+
         // ]);
     }
 }
