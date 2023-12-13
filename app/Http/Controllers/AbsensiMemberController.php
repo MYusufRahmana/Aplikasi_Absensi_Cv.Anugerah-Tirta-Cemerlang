@@ -36,6 +36,7 @@ class AbsensiMemberController extends Controller
             "keterangan" =>'string',
 
         ]);
+
         absensi_member::create([
             "status" =>$request->validate(['status'=>'required'])['status'],
              "id_user" =>auth()->user()->no,
