@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pelatih extends Model
+class Admin extends Model
 {
-    protected $table ="t_pelatih"; 
+    protected $table = 'admins';
+    protected $fillable = ['username','password','nama','hp','role'];
     use HasFactory;
 }

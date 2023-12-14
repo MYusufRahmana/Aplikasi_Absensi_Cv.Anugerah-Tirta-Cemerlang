@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         DB::table('registers')->insert([
-            'nama' => 'Test User',
-            'email' => 'user@gmail.com',
+            'nama' => 'Yusuf Rahmana',
+            'email' => 'yusuf@gmail.com',
             'Gender' => 'Laki-laki',
             'Sekolah' => 'SMPN 1',
             'Health' => 'Sehat',
@@ -33,12 +33,12 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'Jl. Jalan',
             'Hp' => '081234567890',
             'gbr' => 'default.jpg',
-            'status' => '1',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('yusuf'),
+            'role' => 'member',
         ]);
         DB::table('registers')->insert([
-            'nama' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'nama' => 'andi',
+            'email' => 'andi@gmail.com',
             'Gender' => 'Laki-laki',
             'Sekolah' => 'SMPN 1',
             'Health' => 'Sehat',
@@ -48,17 +48,29 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'Jl. Jalan',
             'Hp' => '081234567890',
             'gbr' => 'default.jpg',
-            'status' => '1',
-            'password' => bcrypt('admin'),
+            'password' => bcrypt('andi'),
+            'role'=>'member',
         ]);
+        
         DB::table('t_pelatih')->insert([
-            'kode_pelatih' => '0001',
+            'id' => '1',
             'Nama_pelatih' => 'Pelatih 1',
-            'HP' => 'samsung',
-            'Telp' => '081277788',
-            'Email' => 'pelatih1@gmail.com',
+            'Hp' => '081277788',
+            'Email' => 'pelatih@gmail.com',
+            'password' => bcrypt('pelatih'),
             'Alamat' => 'jln harapan 1',
-            'Username' => 'Pelatih1',
+            'Username' => 'pelatih',
+            'role' => 'pelatih'
+        ]);
+
+        DB::table('admins')->insert([
+            'id' => '1',
+            'email'=>"admin@gmail.com",
+            'username' => 'admin1',
+            'password' => bcrypt('admin'),
+            'nama' => 'Lukman',
+            'hp' => '089532671289',
+            'role' => 'admin'
         ]);
         // DB::table('kelas')->insert([
         //     'id_kelas' => '001',

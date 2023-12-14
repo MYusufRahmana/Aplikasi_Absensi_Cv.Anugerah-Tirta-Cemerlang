@@ -49,6 +49,12 @@
     color: #9AD0C2;
     /* Sesuaikan warna teks sesuai keinginan Anda */
   }
+  body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 </style>
 
 <body class="nav-md">
@@ -70,10 +76,22 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <span class=" fa fa-angle-down"></span> {{ Auth::user()->Nama}}
+                  <span class=" fa fa-angle-down">
+                    @if(Session::has('member')) 
+                      {{ Session::get('member')->Nama }}
+                    @endif
+                    @if(Session::has('admin')) 
+                    {{ Session::get('admin')->Nama }}
+                  @endif
+                  @if(Session::has('pelatih')) 
+                  {{ Session::get('pelatih')->Nama_Pelatih }}
+                @endif
+                  </span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
+                  @if (Session::has('member'))
+                  <li><a href="{{ route('profile.index') }}"> Profile</a></li>
+                  @endif
                   <li>
                     <a href="javascript:;">
                       <span class="badge bg-red pull-right">50%</span>

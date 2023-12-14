@@ -17,8 +17,10 @@
               <ul class="nav side-menu">
                 <li><a href="{{route('home.index')}}"><i class="fa fa-home"></i> Home</a>
                 </li>
-                <li><a href="{{route('absen.index')}}"><i class="fa fa-desktop"></i> Absen </a>
-                </li>
+                @if (Session::has('member'))
+                <li><a href="{{route('absen.index')}}"><i class="fa fa-desktop"></i> Absen Kelas</a></li>
+                <li><a href="{{route('riwayatabsen.index')}}"><i class="fa fa-table"></i> Riwayat Absen Member</a></li>
+                @endif
                 <li><a href="{{url('/laporan')}}"><i class="fa fa-table"></i> Laporan</a>
                 </li>
                 <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
@@ -46,7 +48,7 @@
             <a data-toggle="tooltip" data-placement="top" title="Lock">
               <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="post">
+            <form id="logout-form" action="{{ url('logout') }}" method="post">
               @csrf
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="#" onclick="document.getElementById('logout-form').submit()">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
