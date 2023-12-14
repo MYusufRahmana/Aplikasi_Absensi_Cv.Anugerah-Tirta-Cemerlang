@@ -38,7 +38,7 @@ class AbsensiPelatihController extends Controller
 
         ]);
         absensi_pelatih::create([
-            "status" =>$request->validate(['status'=>'required'])['status'],
+            "status" =>"Menunggu",
              "id_user" =>$id_user,
              "waktu_absen" => now()->format('Y-m-d H:i:s')
         ]);

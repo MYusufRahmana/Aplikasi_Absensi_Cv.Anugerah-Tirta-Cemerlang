@@ -27,7 +27,10 @@
                 <li><a href="{{route('absenpelatih.index')}}"><i class="fa fa-money"></i> Info Gaji</a></li>
                 @endif
                 @if (Session::has('admin'))
-                <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan</a></li>
+                {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Daftar Member</a></li> --}}
+                {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Data Penggajian</a></li> --}}
+                <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Absensi Pelatih</a></li>
+                {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Absensi Member</a></li> --}}
                 @endif
                 {{-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
