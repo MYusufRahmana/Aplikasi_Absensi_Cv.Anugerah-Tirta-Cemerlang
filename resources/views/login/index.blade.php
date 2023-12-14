@@ -19,6 +19,7 @@
           <div class="text-center mb-4">
             <img src="{{ asset('image/tsacLogo.png') }}" alt="Logo" class="img-fluid" style="max-height: 100px;">
           </div>
+          <div class="alert text-danger">{{ session('error') }}</div>
           <form action="{{ url('/login') }}" method="post">
             @csrf
             <div class="form-group">
