@@ -30,36 +30,32 @@
                         @if ($errors->any())
                             {!!  implode('',$errors->all('<div>:message</div>')) !!}
                         @endif
-                        <h4 class="card-title">Profile</h4>
-                        <form action="{{ route('profile.update',$profile->no) }}" class="forms-sample" method="post">
+                        @if (Session::has('success'))
+                        <div class="alert alert-success"> {{session('success') }} </div> 
+                        @endif
+                        <h4 class="card-title">Profile Gaji Pelatih</h4>
+                        <form action="{{ route('penggajianpelatih.update',$pelatih->id) }}" class="forms-sample" method="post">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
-                                <label for="Nama" class="col-sm-3 col-form-label">Nama Member</label>
+                                <label for="Nama_Pelatih" class="col-sm-3 col-form-label">Nama Pelatih</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="Nama" value="{{ $profile->Nama }}" name ="Nama">
+                                    <input type="text" class="form-control" id="Nama_Pelatih" value="{{ $pelatih->Nama_Pelatih }}" name ="Nama_Pelatih" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                    <label for="Hp" class="col-sm-3 col-form-label">No Handphone</label>
+                                    <label for="role" class="col-sm-3 col-form-label">Peran</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="Hp" value="{{ $profile->Hp }}" name ="Hp">
+                                    <input type="text" class="form-control" id="role" value="{{ $pelatih->role }}" name ="role" disabled>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="Ortu" class="col-sm-3 col-form-label">Nama Orang tua</label>
+                                <label for="gaji" class="col-sm-3 col-form-label">Gaji</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="Ortu" value="{{ $profile->Ortu }}" name ="Ortu">
+                                    <input type="number" class="form-control form-number" id="gaji" value="{{ $pelatih->gaji }}" placeholder="Masukkan Gaji" name ="gaji">
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="Alamat" class="col-sm-3 col-form-label">Alamat</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="Alamat" value="{{ $profile->Alamat }}" name ="Alamat">
-                                </div>
-                            </div>
                             <button type="submit" class="btn btn-success mr-2">Submit</button>
-                            <a href="{{ url('/dashboard') }}" class="btn btn-warning">Cancel</a>
+                            <a href="{{ route('penggajianpelatih.index') }}" class="btn btn-warning">Cancel</a>
                         </form>
                     </div>
                 </div>

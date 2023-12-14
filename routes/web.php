@@ -5,11 +5,14 @@ use App\Http\Controllers\AbsensiMemberController;
 use App\Http\Controllers\AbsensiPelatihController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengajianPelatihController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RiwayatAbsenMember;
+use App\Http\Controllers\RiwayatAbsensiPelatihController;
 use App\Models\register;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +30,12 @@ Route::resource('home', HomeController::class);
 Route::resource('profile', ProfileController::class);
 
 Route::resource('riwayatabsen', RiwayatAbsenMember::class);
+Route::resource('riwayatabsenpelatih', RiwayatAbsensiPelatihController::class);
 
+Route::resource('penggajianpelatih', PengajianPelatihController::class);
+
+Route::resource('laporan', LaporanController::class);
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
-Route::get('/laporan', [ReportController::class, 'index'])->name('laporan');
 // require __DIR__ . '/auth.php';
 

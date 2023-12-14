@@ -60,7 +60,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('pelatih'),
             'Alamat' => 'jln harapan 1',
             'Username' => 'pelatih',
-            'role' => 'pelatih'
+            'role' => 'pelatih',
+            'gaji' => 0,
         ]);
 
         DB::table('t_pelatih')->insert([
@@ -71,7 +72,8 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('pelatih'),
             'Alamat' => 'jln harapan 1',
             'Username' => 'pelatih',
-            'role' => 'pelatih'
+            'role' => 'pelatih',
+            'gaji' => 0,
         ]);
 
         DB::table('admins')->insert([

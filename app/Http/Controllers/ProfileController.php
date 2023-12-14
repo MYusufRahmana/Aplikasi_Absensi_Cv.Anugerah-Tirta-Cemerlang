@@ -38,16 +38,16 @@ class ProfileController extends Controller
             'Ortu'=>'required|string', 
             'Alamat'=>'required|string', 
          ]);
-    
+         
          if($validatedData) {
             $user->update([
                 'Nama'=>$request->Nama,
                 'Hp'=>$request->Hp,
                 'Ortu'=>$request->Ortu,
-                'Alamat'=>$request->Alamat,
+                'Alamat'=>$request->Alamat
             ]);
-         }
-         return redirect()->route('profile.index')->with('success','Data berhasil di ubah');
+        }
+        return Redirect::back()->with('success','Data berhasil di ubah');
     }
     /**
      * Delete the user's account.

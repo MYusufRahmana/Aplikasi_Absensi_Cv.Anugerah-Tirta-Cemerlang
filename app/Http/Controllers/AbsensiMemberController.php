@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\absensi_member;
 use App\Http\Requests\Storeabsensi_memberRequest;
 use App\Http\Requests\Updateabsensi_memberRequest;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use League\Flysystem\UnableToRetrieveMetadata;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -36,19 +38,26 @@ class AbsensiMemberController extends Controller
      */
     public function store(Storeabsensi_memberRequest $request)
     {
+        $date = Carbon::now()->format('Y-m-d 00:00:00');
         $id_user = $request->session()->get('member')->no;
         $validate = $request ->validate([
             'status'=>'required',
             "keterangan" =>'string',
 
         ]);
-        absensi_member::create([
-            "status" =>$request->validate(['status'=>'required'])['status'],
-             "id_user" =>$id_user,
-             "waktu_absen" => now()->format('Y-m-d H:i:s')
-        ]);
 
-        return redirect()->route('absen.index')->with('success', "Data Berhasil Dibuat" );
+        if(absensi_member::find($id_user)->waktu_absen==$date) {
+            return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
+        } 
+
+        else {
+            absensi_member::create([
+                "status" =>$request->validate(['status'=>'required'])['status'],
+                "id_user" =>$id_user,
+                "waktu_absen" => now()->format('Y-m-d')
+            ]);
+        }
+        return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );
     }
 
     /**

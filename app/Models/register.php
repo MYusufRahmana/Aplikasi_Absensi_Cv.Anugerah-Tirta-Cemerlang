@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class register extends Model
 {
     use HasFactory;
-    protected $table = 'registers';
-    protected $filiabe = ['nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','email','gbr','password','role'];
-
     protected $primaryKey = 'no';
+    protected $guarded = "no";
+    protected $table = 'registers';
+    protected $fillable = ['Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password','role'];
+
     public function absensi_member() {
         return $this->belongsTo(absensi_member::class,'No','id_user');
     }
