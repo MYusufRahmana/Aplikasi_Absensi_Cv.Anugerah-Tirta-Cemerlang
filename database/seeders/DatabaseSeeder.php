@@ -63,6 +63,17 @@ class DatabaseSeeder extends Seeder
             'role' => 'pelatih'
         ]);
 
+        DB::table('t_pelatih')->insert([
+            'id' => '2',
+            'Nama_pelatih' => 'Pelatih 2',
+            'Hp' => '081277788',
+            'Email' => 'pelatih2@gmail.com',
+            'password' => bcrypt('pelatih'),
+            'Alamat' => 'jln harapan 1',
+            'Username' => 'pelatih',
+            'role' => 'pelatih'
+        ]);
+
         DB::table('admins')->insert([
             'id' => '1',
             'email'=>"admin@gmail.com",

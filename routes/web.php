@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AbsensiMemberController;
+use App\Http\Controllers\AbsensiPelatihController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -19,6 +20,7 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 route::get('/dashboard',[DashboardController::class,'index']);
 Route::resource('absen', AbsensiMemberController::class);
+Route::resource('absenpelatih', AbsensiPelatihController::class);
 Route::resource('home', HomeController::class);
 // Route::resource('jumlah', RegisterController::class);
 

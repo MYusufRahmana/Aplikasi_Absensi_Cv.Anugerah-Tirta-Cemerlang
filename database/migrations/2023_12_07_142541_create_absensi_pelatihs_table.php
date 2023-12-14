@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('t_absensi_pelatih', function (Blueprint $table) {
-        //     $table->unsignedBigInteger('id_absensi_pelatih');
-        //     $table->primary('id_absensi_pelatih');
-        //     $table->
-        //     $table->datetime('waktu_absen');
-        //     $table->string('hasil');
-        //     $table->string('status');
-        //     $table->string('keterangan');
-        //     $table->timestamps();
-
+        Schema::create('absensi_pelatih', function (Blueprint $table) {
+            $table->increments('id_absensi_pelatih');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign('id_user')->references('id')->on('t_pelatih')->onDelete('cascade');
+            $table->datetime('waktu_absen');
+            $table->string('status');
+            $table->timestamps();
             
-        // });
+        });
     }
 
     /**

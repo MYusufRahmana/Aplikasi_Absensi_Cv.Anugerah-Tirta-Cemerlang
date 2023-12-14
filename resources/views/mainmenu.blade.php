@@ -81,7 +81,7 @@
                       {{ Session::get('member')->Nama }}
                     @endif
                     @if(Session::has('admin')) 
-                    {{ Session::get('admin')->Nama }}
+                    {{ Session::get('admin')->nama }}
                   @endif
                   @if(Session::has('pelatih')) 
                   {{ Session::get('pelatih')->Nama_Pelatih }}
