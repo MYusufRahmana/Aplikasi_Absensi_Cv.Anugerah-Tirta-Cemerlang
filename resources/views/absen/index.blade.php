@@ -139,6 +139,9 @@
         </thead>
         <tbody id="presensiTable">
             <tr>
+                @if($absensi->isEmpty())
+                 
+                @else
                 @if ($absensi->first()->register->Kelas=="1")
                     Kelas Pemula - Reguler
                 @endif
@@ -150,6 +153,8 @@
                 @endif
                 @if ($absensi->first()->register->Kelas=="4")
                     Jalur Prestasi
+                @endif
+                
                 @endif
             </tr>
             @foreach($absensi as $absensi_member)
@@ -163,7 +168,7 @@
     </table>
 
     <!-- Form presensi mandiri -->
-    <form action="{{route('absen.store')}}" method="post">
+    <form action="{{route('absen.store',Session::get('member')->no)}}" method="post">
         @csrf
         <div class="presensi-form" id="presensiForm">
             <div class="form-content">

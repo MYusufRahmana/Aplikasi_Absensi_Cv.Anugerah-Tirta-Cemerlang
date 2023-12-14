@@ -6,15 +6,20 @@ use App\Models\absensi_member;
 use App\Http\Requests\Storeabsensi_memberRequest;
 use App\Http\Requests\Updateabsensi_memberRequest;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
+use League\Flysystem\UnableToRetrieveMetadata;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AbsensiMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
-        $absensi = absensi_member::all();
+        $user_id = session()->get('member')->no;
+        $absensi = absensi_member::where('id_user', $user_id)->get();
         return view('absen.index',compact('absensi'));
     }
 
@@ -31,15 +36,15 @@ class AbsensiMemberController extends Controller
      */
     public function store(Storeabsensi_memberRequest $request)
     {
+        $id_user = $request->session()->get('member')->no;
         $validate = $request ->validate([
             'status'=>'required',
             "keterangan" =>'string',
 
         ]);
-
         absensi_member::create([
             "status" =>$request->validate(['status'=>'required'])['status'],
-             "id_user" =>auth()->user()->no,
+             "id_user" =>$id_user,
              "waktu_absen" => now()->format('Y-m-d H:i:s')
         ]);
 
@@ -50,7 +55,7 @@ class AbsensiMemberController extends Controller
      * Display the specified resource.
      */
     public function show(absensi_member $absensi_member)
-    {
+    {   
         //
     }
 

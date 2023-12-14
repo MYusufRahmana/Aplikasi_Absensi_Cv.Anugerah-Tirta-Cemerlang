@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('t_pelatih', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->primary('id');
-            $table->string('Nama_Pelatih');
-            $table->string('Hp');
-            $table->string('Email');
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->string('email');
+            $table->string('username');
             $table->string('password');
-            $table->string('Alamat');
-            $table->string('Username');
+            $table->string('nama');
+            $table->string('hp');
             $table->enum('role', ['member', 'pelatih', 'admin']);
             $table->timestamps();
         });
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pelatihs');
+        Schema::dropIfExists('admins');
     }
 };
