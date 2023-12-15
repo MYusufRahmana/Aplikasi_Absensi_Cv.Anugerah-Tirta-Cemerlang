@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\absensi_pelatih;
 use App\Http\Requests\Storeabsensi_pelatihRequest;
 use App\Http\Requests\Updateabsensi_pelatihRequest;
+use App\Models\RiwayatAbsensiPelatih;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AbsensiPelatihController extends Controller
 {
@@ -31,19 +34,44 @@ class AbsensiPelatihController extends Controller
      */
     public function store(Request $request)
     {
+        $date = Carbon::now()->format('Y-m-d 00:00:00');
         $id_user = $request->session()->get('pelatih')->id;
         $validate = $request ->validate([
             'status'=>'required',
             "keterangan" =>'string',
 
         ]);
-        absensi_pelatih::create([
-            "status" =>"Menunggu",
-             "id_user" =>$id_user,
-             "waktu_absen" => now()->format('Y-m-d')
-        ]);
+        if(absensi_pelatih::where('id_user', $id_user)->get()->isEmpty()) {
+            absensi_pelatih::create([
+                "status" =>"Menunggu",
+                 "id_user" =>$id_user,
+                 "waktu_absen" => now()->format('Y-m-d')
+            ]);
+            RiwayatAbsensiPelatih::create([
+                "id_user" =>$id_user,
+                "waktu_absen" => now()->format('Y-m-d'),
+                "status" =>"Menunggu",
+            ]);
+            return redirect()->route('absenpelatih.index')->with('success', "Data Berhasil Dibuat" );
+        }
+        else {
+            if(absensi_pelatih::find($id_user)->waktu_absen==$date) {
+                return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
+            }else {
+                absensi_pelatih::create([
+                    "status" =>"Menunggu",
+                     "id_user" =>$id_user,
+                     "waktu_absen" => now()->format('Y-m-d')
+                ]);
+                RiwayatAbsensiPelatih::create([
+                    "id_user" =>$id_user,
+                    "waktu_absen" => now()->format('Y-m-d'),
+                    "status" =>"Menunggu",
+                ]);
+                return redirect()->route('absenpelatih.index')->with('success', "Data Berhasil Dibuat" );
 
-        return redirect()->route('absenpelatih.index')->with('success', "Data Berhasil Dibuat" );
+            }
+        }
     }
 
     /**

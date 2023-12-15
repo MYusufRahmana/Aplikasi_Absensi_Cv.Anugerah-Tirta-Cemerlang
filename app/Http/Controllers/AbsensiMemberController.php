@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\absensi_member;
 use App\Http\Requests\Storeabsensi_memberRequest;
 use App\Http\Requests\Updateabsensi_memberRequest;
+use App\Models\RiwayatAbsensiMember;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,24 @@ class AbsensiMemberController extends Controller
             "keterangan" =>'string',
 
         ]);
-
+        if (absensi_member::where('id_user', $id_user)->get()->isEmpty()) {
+            absensi_member::create([
+                "status" => $request->validate(['status' => 'required'])['status'],
+                "id_user" => $id_user,
+                "waktu_absen" => now()->format('Y-m-d')
+            ]);
+            RiwayatAbsensiMember::create([
+                "id_user" =>$id_user,
+                "kelas"=>$request->session()->get('member')->Kelas,
+                "waktu_absen" => now()->format('Y-m-d'),
+                "status" =>$request->status,
+            ]);
+            return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );
+        }else {
+            if(absensi_member::find($id_user)->waktu_absen==$date) {
+                return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
+            } 
+        }
         if(absensi_member::find($id_user)->waktu_absen==$date) {
             return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
         } 
@@ -55,6 +73,12 @@ class AbsensiMemberController extends Controller
                 "status" =>$request->validate(['status'=>'required'])['status'],
                 "id_user" =>$id_user,
                 "waktu_absen" => now()->format('Y-m-d')
+            ]);
+            RiwayatAbsensiMember::create([
+                "id_user" =>$id_user,
+                "kelas"=>$request->session()->get('member')->Kelas,
+                "waktu_absen" => now()->format('Y-m-d'),
+                "status" =>$request->status,
             ]);
         }
         return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );

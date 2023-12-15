@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\absensi_pelatih;
-use App\Models\RiwayatAbsensiPelatih;
+use App\Models\pelatih;
+use App\Models\riwayatabsensipelatih;
 use Illuminate\Http\Request;
 
-class RiwayatAbsensiPelatihController extends Controller
+class GajiPelatihController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user_id = session()->get('pelatih')->id;
-        $user = RiwayatAbsensiPelatih::where(['id_user'=>$user_id])->get();
-        return view('riwayatabsenpelatih.index',compact('user'));
+        $id=session()->get('pelatih')->id;
+        // $user = absensi_pelatih::where(['id_user' => $id])->get();
+        $jumlahAbsen = count(absensi_pelatih::where(['id_user' => $id, 'status'=>"Hadir"])->get());
+        return view('pelatih.gaji',[
+            'jumlahAbsen'=>$jumlahAbsen,
+        ]);
     }
 
     /**

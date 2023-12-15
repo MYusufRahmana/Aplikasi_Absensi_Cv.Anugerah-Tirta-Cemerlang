@@ -14,7 +14,7 @@ class register extends Model
     protected $table = 'registers';
     protected $fillable = ['Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password','role'];
 
-    public function absensi_member() {
-        return $this->belongsTo(absensi_member::class,'No','id_user');
+    public function riwayatabsensimember() {
+        return $this->belongsTo(riwayatabsensimember::class,'No','id_user');
     }
 }

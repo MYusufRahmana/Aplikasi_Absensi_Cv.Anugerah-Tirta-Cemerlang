@@ -125,7 +125,10 @@
 <body>
     <h2>Pertemuan</h2>
     @if (Session::has('success'))
-    <h1>{{ Session::get('success') }}</h1>
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+    @if (Session::has('warning'))
+        <div class="alert alert-warning">{{ Session::get('warning') }}</div>
     @endif
     <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
 
