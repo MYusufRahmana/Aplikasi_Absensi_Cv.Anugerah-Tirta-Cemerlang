@@ -18,19 +18,21 @@
                 </li>
                 @if (Session::has('member'))
                     <li><a href="{{ route('absen.index') }}"><i class="fa fa-calendar"></i> Absen Kelas</a></li>
-                    <li><a href="{{ route('riwayatabsen.index') }}"><i class="fa fa-bookmark"></i> Riwayat Absen Member</a></li>
+                    <li><a href="{{ route('riwayatabsen.index') }}"><i class="fa fa-bookmark"></i> Riwayat Absen</a></li>
                 @endif
                 @if (Session::has('pelatih'))
                     <li><a href="{{ route('absenpelatih.index') }}"><i class="fa fa-table"></i> Absen Pelatih</a></li>
-                    <li><a href="{{ route('riwayatabsenpelatih.index') }}"><i class="fa fa-bookmark"></i> Riwayat Absen Pelatih</a></li>
+                    <li><a href="{{ route('riwayatabsenpelatih.index') }}"><i class="fa fa-bookmark"></i> Riwayat Absen</a></li>
                     <li><a href="{{ route('gajipelatih.index') }}"><i class="fa fa-money"></i> Info Gaji</a></li>
                 @endif
                 @if (Session::has('admin'))
+                    <li><a href="{{ route('absenadmin.index') }}"><i class="fa fa-calendar"></i> Absen Admin</a></li>
                     {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Daftar Member</a></li> --}}
-                    <li><a href="{{ url('/pelatih') }}"><i class="fa fa-user-plus"></i> Kelola Pelatih</a></li>
-                    <li><a href="{{ url('/laporan') }}"><i class="fa fa-file"></i> Verifikasi Absensi Pelatih</a></li>
+                    <li><a href="{{ route('pelatih.index') }}"><i class="fa fa-user-plus"></i> Kelola Pelatih</a></li>
+                    <li><a href="{{ route('laporan.index') }}"><i class="fa fa-file"></i> Verifikasi Absensi Pelatih</a></li>
                     {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Pelatih</a></li> --}}
-                    {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Absensi Member</a></li> --}}
+                    <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Member</a></li>
+                    <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Pelatih</a></li>
                 @endif
                 {{-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
