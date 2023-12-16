@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\absensi_member;
+use App\Models\riwayatabsensimember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LaporanAbsenMember extends Controller
 {
@@ -11,7 +14,10 @@ class LaporanAbsenMember extends Controller
      */
     public function index()
     {
-        return view('laporanabsenmember.index');
+        $member = absensi_member::get();
+        return view('laporanabsenmember.index',[
+            'member'=>$member,
+        ]);
     }
 
     /**

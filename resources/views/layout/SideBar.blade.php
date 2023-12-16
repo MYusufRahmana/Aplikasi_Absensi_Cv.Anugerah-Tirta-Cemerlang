@@ -1,7 +1,7 @@
 <div class="left_col scroll-view">
     <div class="navbar nav_title">
         <div class="navbar nav_title">
-            <a href="index.html" class="">
+            <a href="{{ url("dashboard") }}" class="">
                 <img src="{{ asset('image/tsacLogo.png') }}" alt="TSAC Logo" class="logo_img">
                 <span class="logo_text">Tirta Sriwijaya Aquatiq Club</span>
             </a>
@@ -32,7 +32,7 @@
                     <li><a href="{{ route('laporan.index') }}"><i class="fa fa-file"></i> Verifikasi Absensi Pelatih</a></li>
                     {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Pelatih</a></li> --}}
                     <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Member</a></li>
-                    <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Pelatih</a></li>
+                    {{-- <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Pelatih</a></li> --}}
                 @endif
                 {{-- <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
