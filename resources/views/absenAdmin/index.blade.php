@@ -148,7 +148,7 @@
                 @else
                     @foreach ($absensi as $item)
                         <tr>
-                            <td>{{ $item->admin->nama }}</td>
+                            <td>{{ $item->admin->nama}}</td>
                             <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
                             <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>
                         </tr>
