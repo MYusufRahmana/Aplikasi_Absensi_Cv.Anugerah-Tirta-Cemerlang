@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_member;
+use App\Models\pelatih;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 
-class RiwayatAbsenMember extends Controller
+class PengajianPelatihController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user_id = session()->get('member')->no;
-        $user = absensi_member::where(['id_user' => $user_id])->get();
-        return view('riwayatAbsenMember.index', compact('user'));
+        return view('penggajianPelatih.index',[
+            "pelatih" =>pelatih::all()
+        ]);
     }
 
     /**
@@ -48,7 +47,10 @@ class RiwayatAbsenMember extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $pelatih = pelatih::find($id);
+        return view('penggajianpelatih.edit',[
+            "pelatih"=>$pelatih
+        ]);
     }
 
     /**
@@ -56,7 +58,19 @@ class RiwayatAbsenMember extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $gaji = intval($request->gaji);
+        $pelatih=pelatih::find($id);
+
+        $validatedData=$request->validate([
+            'gaji'=>'required|numeric', 
+         ]);
+         if($validatedData) {
+             $pelatih->update([
+                 'gaji'=>$gaji
+             ]);
+             return Redirect::back()->with('success',"Gaji Telah Diperbarui");
+         }   
+
     }
 
     /**

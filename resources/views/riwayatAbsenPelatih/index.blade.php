@@ -22,15 +22,15 @@
             @foreach($user as $riwayat)
             <tr>
                 <td>{{ $riwayat->pelatih->Nama_Pelatih}}</td>
-                <td>{{ date('d M Y H:i:s', strtotime($riwayat->waktu_absen)) }}</td>
+                <td>{{ date('d M Y', strtotime($riwayat->waktu_absen)) }}</td>
                 <td>{{ $riwayat->status }}</td>
             </tr>
             @endforeach
-            {{-- @if ($user->isEmpty())
-            <tr>
-                <td colspan="3">Tidak ada data absensi.</td>
-            </tr>
-            @endif --}}
+                @if ($user->isEmpty())
+                <tr>
+                    <td colspan="3">Tidak ada data absensi.</td>
+                </tr>
+                @endif
         </tbody>
     </table>
 </body>

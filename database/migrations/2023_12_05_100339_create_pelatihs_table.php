@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('Alamat');
             $table->string('Username');
             $table->enum('role', ['member', 'pelatih', 'admin']);
+            $table->integer('gaji')->unsigned();
             $table->timestamps();
         });
     }

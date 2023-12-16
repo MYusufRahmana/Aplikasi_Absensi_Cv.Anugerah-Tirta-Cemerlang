@@ -141,30 +141,16 @@
                 </tr>
             </thead>
             <tbody id="presensiTable">
-                <tr>
-                        @if (Session::get('member')->Kelas == '1')
-                            Kelas Pemula - Reguler
-                        @endif
-                        @if (Session::get('member')->Kelas == '2')
-                            Kelas Pemula - Group
-                        @endif
-                        @if (Session::get('member')->Kelas == '3')
-                            Kelas Pemula - Private
-                        @endif
-                        @if (Session::get('member')->Kelas == '4')
-                            Jalur Prestasi
-                        @endif
-                </tr>
                 @if ($absensi->isEmpty())
                     <tr>
                         <td colspan="3">Silahkan Melakukan Absensi</td>
                     </tr>
                 @else
-                    @foreach ($absensi as $absensi_member)
+                    @foreach ($absensi as $item)
                         <tr>
-                            <td>{{ $absensi_member->register->Nama }}</td>
-                            <td>{{ date('d M Y', strtotime($absensi_member->waktu_absen)) }}</td>
-                            <td style="background-color: {{ $absensi_member->status == 'Hadir' ? '#4CAF50' : ($absensi_member->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $absensi_member->status }}</td>
+                            <td>{{ $item->admin->nama}}</td>
+                            <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
+                            <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>
                         </tr>
                     @endforeach
                 @endif
@@ -172,7 +158,7 @@
         </table>
 
         <!-- Form presensi mandiri -->
-        <form action="{{ route('absen.store', Session::get('member')->no) }}" method="post">
+        <form action="{{ route('absenadmin.store', Session::get('admin')->id) }}" method="post">
             @csrf
             <div class="presensi-form" id="presensiForm">
                 <div class="form-content">

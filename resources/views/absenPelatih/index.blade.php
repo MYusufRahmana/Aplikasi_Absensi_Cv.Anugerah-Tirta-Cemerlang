@@ -125,7 +125,10 @@
 <body>
     <h2>Pertemuan</h2>
     @if (Session::has('success'))
-    <h1>{{ Session::get('success') }}</h1>
+        <div class="alert alert-success">{{ Session::get('success') }}</div>
+    @endif
+    @if (Session::has('warning'))
+        <div class="alert alert-warning">{{ Session::get('warning') }}</div>
     @endif
     <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
 
@@ -149,18 +152,12 @@
             @endif --}}
             <tr>
                 <td>{{ ($absensi_pelatih->pelatih->Nama_Pelatih)}}</td>
-
                 <td>{{ date('d M Y H:i:s', strtotime($absensi_pelatih->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
                                                 ($absensi_pelatih->status == 'Izin' ? '#FFD700' :
-                                                ($absensi_pelatih->status == "Bolos" ? '#Ff0000' : 
-                                                ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00' 
+                                                ($absensi_pelatih->status == "Bolos" ? '#Ff0000' :
+                                                ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00'
                                                 : 'transparent'))) }}; color: black;">{{ $absensi_pelatih->status }}</td>
-                <td>{{ date('d M Y H:i:s', strtotime($absensi_pelatih->pelatih->waktu_absen)) }}</td>
-                <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
-                                                ($absensi_pelatih->status == 'Izin' ? '#FFD700' : 
-                                                ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00' 
-                                                : 'transparent')) }}; color: black;">{{ $absensi_pelatih->status }}</td>
             </tr>
             @endforeach
         </tbody>
