@@ -60,13 +60,14 @@ class AbsensiMemberController extends Controller
             ]);
             return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );
         }else {
-            if(absensi_member::find($id_user)->waktu_absen==$date) {
-                return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
-            } 
+            if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
+                return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
+            }
         }
-        if(absensi_member::find($id_user)->waktu_absen==$date) {
-            return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
-        } 
+
+        if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
+            return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
+        }
 
         else {
             absensi_member::create([

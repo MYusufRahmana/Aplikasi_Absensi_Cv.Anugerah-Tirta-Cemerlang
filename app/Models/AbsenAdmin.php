@@ -12,6 +12,6 @@ class AbsenAdmin extends Model
     protected $fillable = ['id_user','waktu_absen','status']; 
 
     public function Admin() {
-        return $this->belongsTo(Admin::class,'id','id');
+        return $this->belongsTo(Admin::class,'id_user','id');
     }
 }

@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_pelatih;
-use App\Models\riwayatabsensipelatih;
+use App\Models\register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class LaporanController extends Controller
+class MemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $reqAbsenPelatih=absensi_pelatih::where("status","Menunggu")->get();
-        return view('laporan.index',[
-            'reqAbsen' => $reqAbsenPelatih
+        $member = register::all();
+        return view('member.index',[
+            'member'=> $member
         ]);
     }
 
@@ -49,7 +48,10 @@ class LaporanController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $member = register::find($id);
+        return view('member.edit',[
+            'member'=>$member,
+        ]);
     }
 
     /**
@@ -57,25 +59,26 @@ class LaporanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $idAbsenPelatih = absensi_pelatih::find($id);
-        $idRiwayatPelatih = riwayatabsensipelatih::find($id);
-        if($request->H) {
-            $idAbsenPelatih->update([
-                'status'=>$request->H
+        // return dd($request);
+        $member = register::find($id);
+        $validatedata = request()->validate([
+            'Nama'=>'required|string',
+            'Sekolah'=>'required|string',
+            'Health'=>'required|string',
+            'Kelas'=>'required|string',
+        ]);
+        if($validatedata) {
+            $member->update([
+                'Nama'=>$request->Nama,
+                'Sekolah'=>$request->Sekolah,
+                'Health'=>$request->Health,
+                'Kelas'=>$request->Kelas,
             ]);
-            $idRiwayatPelatih->update([
-                'status'=>$request->H
-            ]);
-            return Redirect::back()->with('success','Verifikasi Absen Berhasil');
+            return Redirect::back()->with('success','Berhasil mengubah data');
         }
-        elseif ($request->B) {
-            $idAbsenPelatih->update([
-                'status'=>$request->B
-            ]);
-            $idRiwayatPelatih->update([
-                'status'=>$request->B
-            ]);
-            return Redirect::back()->with('success','Verifikasi Absen Berhasil');
+        else {
+            return Redirect::back()->with('error','Gagal mengubah data');
+            
         }
     }
 

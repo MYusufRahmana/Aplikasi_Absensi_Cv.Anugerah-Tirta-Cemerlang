@@ -154,10 +154,9 @@
                 <td>{{ ($absensi_pelatih->pelatih->Nama_Pelatih)}}</td>
                 <td>{{ date('d M Y H:i:s', strtotime($absensi_pelatih->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
-                                                ($absensi_pelatih->status == 'Izin' ? '#FFD700' :
-                                                ($absensi_pelatih->status == "Bolos" ? '#Ff0000' : 
+                                                ($absensi_pelatih->status == "Tidak Hadir" ? '#Ff0000' : 
                                                 ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00' 
-                                                : 'transparent'))) }}; color: black;">{{ $absensi_pelatih->status }}</td>
+                                                : 'transparent')) }}; color: black;">{{ $absensi_pelatih->status }}</td>
             </tr>
             @endforeach
         </tbody>

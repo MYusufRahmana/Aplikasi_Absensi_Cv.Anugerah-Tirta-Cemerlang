@@ -52,12 +52,13 @@ class AbsensiPelatihController extends Controller
                 "waktu_absen" => now()->format('Y-m-d'),
                 "status" =>"Menunggu",
             ]);
-            return redirect()->route('absenpelatih.index')->with('success', "Data Berhasil Dibuat" );
+            return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );
         }
         else {
-            if(absensi_pelatih::find($id_user)->waktu_absen==$date) {
-                return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
-            }else {
+            if (absensi_pelatih::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
+                return redirect()->route('absenpelatih.index')->with('warning', 'Anda Sudah Mengajukan Absen Hari ini');
+            }
+            else {
                 absensi_pelatih::create([
                     "status" =>"Menunggu",
                      "id_user" =>$id_user,
@@ -68,7 +69,7 @@ class AbsensiPelatihController extends Controller
                     "waktu_absen" => now()->format('Y-m-d'),
                     "status" =>"Menunggu",
                 ]);
-                return redirect()->route('absenpelatih.index')->with('success', "Data Berhasil Dibuat" );
+                return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );
 
             }
         }

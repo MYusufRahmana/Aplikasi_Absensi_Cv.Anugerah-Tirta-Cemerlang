@@ -41,19 +41,13 @@
                                     @csrf
                                     @method('PUT')
                                     <input type="hidden" name ="H" id="H" value="Hadir">
-                                    <button type="submit" class="btn btn-success d-flex">Hadir</button>
+                                    <button type="submit" class="btn btn-success d-flex">Setuju</button>
                                 </form>
                                 <form action="{{ route('laporan.update', $item->id_absensi_pelatih) }}" method="POST">
                                     @csrf
                                     @method('PUT')
-                                    <input type="hidden" name ="B" id="B" value="Bolos">
-                                    <button type="submit" class="btn btn-danger d-flex">Bolos</button>
-                                </form>
-                                <form action="{{ route('laporan.update', $item->id_absensi_pelatih) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="hidden" name ="I" id="I" value="Izin">
-                                    <button type="submit" class="btn btn-danger d-flex">Izin</button>
+                                    <input type="hidden" name ="B" id="B" value="Tidak Hadir">
+                                    <button type="submit" class="btn btn-danger d-flex">Tolak</button>
                                 </form>
                             </td>
                         </tr>
