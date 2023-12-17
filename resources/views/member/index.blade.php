@@ -43,7 +43,19 @@
                                 <td>{{ $item->Nama }}</td>
                                 <td>{{ $item->Sekolah }}</td>
                                 <td>{{ $item->Health }}</td>
-                                <td>{{ $item->Kelas }}</td>
+                                @if ($item->Kelas =="1") 
+                                    <td>Kelas Pemula - Reguler</td>
+                                @endif
+                                @if ($item->Kelas =="2") 
+                                    <td>Kelas Pemula - Group</td>
+                                @endif
+                                @if ($item->Kelas =="3") 
+                                    <td>Kelas Pemula - Private</td>
+                                @endif
+                                @if ($item->Kelas =="4") 
+                                    <td>Jalur Prestasi</td>
+                                @endif
+                                {{-- <td>{{ $item->Kelas }}</td> --}}
                                 <td>{{ $item->Hp }}</td>
                                 <td class="">
                                     <a href="{{ route('member.edit', $item->no) }}"><button class="btn btn-warning">Edit</button></a>
