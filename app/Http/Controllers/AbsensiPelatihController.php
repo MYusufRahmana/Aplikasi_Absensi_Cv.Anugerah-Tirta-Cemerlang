@@ -37,19 +37,21 @@ class AbsensiPelatihController extends Controller
         $date = Carbon::now()->format('Y-m-d 00:00:00');
         $id_user = $request->session()->get('pelatih')->id;
         $validate = $request ->validate([
-            'status'=>'required',
+            'kelas'=>'required',
             "keterangan" =>'string',
 
         ]);
         if(absensi_pelatih::where('id_user', $id_user)->get()->isEmpty()) {
             absensi_pelatih::create([
+                "id_user" =>$id_user,
+                "kelas" =>$request->kelas,
+                "waktu_absen" => now()->format('Y-m-d'),
                 "status" =>"Menunggu",
-                 "id_user" =>$id_user,
-                 "waktu_absen" => now()->format('Y-m-d')
             ]);
             RiwayatAbsensiPelatih::create([
                 "id_user" =>$id_user,
                 "waktu_absen" => now()->format('Y-m-d'),
+                "kelas" =>$request->kelas,
                 "status" =>"Menunggu",
             ]);
             return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );
@@ -60,13 +62,15 @@ class AbsensiPelatihController extends Controller
             }
             else {
                 absensi_pelatih::create([
+                    "id_user" =>$id_user,
+                    "kelas" =>$request->kelas,
+                    "waktu_absen" => now()->format('Y-m-d'),
                     "status" =>"Menunggu",
-                     "id_user" =>$id_user,
-                     "waktu_absen" => now()->format('Y-m-d')
                 ]);
                 RiwayatAbsensiPelatih::create([
                     "id_user" =>$id_user,
                     "waktu_absen" => now()->format('Y-m-d'),
+                    "kelas" =>$request->kelas,
                     "status" =>"Menunggu",
                 ]);
                 return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );

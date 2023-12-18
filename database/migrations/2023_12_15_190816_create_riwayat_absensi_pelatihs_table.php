@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('t_pelatih')->onDelete('cascade');
             $table->datetime('waktu_absen');
+            $table->string('kelas');
             $table->string('status');
             $table->timestamps();
         });

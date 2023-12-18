@@ -152,7 +152,7 @@
             @endif --}}
             <tr>
                 <td>{{ ($absensi_pelatih->pelatih->Nama_Pelatih)}}</td>
-                <td>{{ date('d M Y H:i:s', strtotime($absensi_pelatih->waktu_absen)) }}</td>
+                <td>{{ date('d M Y', strtotime($absensi_pelatih->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
                                                 ($absensi_pelatih->status == "Tidak Hadir" ? '#Ff0000' : 
                                                 ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00' 
@@ -169,7 +169,15 @@
             <div class="form-content">
                 <span class="close-btn" onclick="closePresensiForm()">&times;</span>
                 <h3 class="text-center">Form Presensi Mandiri Pelatih</h3>
-                <div class="radio-group">
+                <div class="form-select content-center radio-group">
+                    <select name="kelas" id="kelas" class="form-select">
+                        <option value="1">Kelas Pemula - Group</option>
+                        <option value="2">Kelas Pemula - Reguler</option>
+                        <option value="3">Kelas Pemula - Private</option>
+                        <option value="4">Jalur Prestasi</option>
+                    </select>
+                </div>
+                {{-- <div class="radio-group">
                     <div class="radio-label">
                         <input type="radio" id="hadir" name="status" value="Hadir" required>
                         <label for="hadir">Hadir</label>
@@ -178,7 +186,7 @@
                         <input type="radio" id="izin" name="status" value="Izin" required>
                         <label for="izin">Izin</label>
                     </div>
-                </div>
+                </div> --}}
                 <button class="submit-btn" type="submit">Submit</button>
             </div>
         </div>
