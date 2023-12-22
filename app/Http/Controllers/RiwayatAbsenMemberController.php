@@ -16,7 +16,7 @@ class RiwayatAbsenMemberController extends Controller
     public function index()
     {
         $user_id = session()->get('member')->no;
-        $user = RiwayatAbsensiMember::where(['id' => $user_id])->get();
+        $user = RiwayatAbsensiMember::where(['id_user' => $user_id])->get();
         return view('riwayatAbsenMember.index', compact('user'));
     }
 

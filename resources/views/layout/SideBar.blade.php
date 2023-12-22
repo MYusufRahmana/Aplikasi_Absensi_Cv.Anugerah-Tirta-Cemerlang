@@ -24,7 +24,6 @@
                     <li><a href="{{ route('absenpelatih.index') }}"><i class="fa fa-table"></i> Absen Pelatih</a></li>
                     <li><a href="{{ route('riwayatabsenpelatih.index') }}"><i class="fa fa-bookmark"></i> Riwayat Absen</a></li>
                     <li><a href="{{ route('gajipelatih.index') }}"><i class="fa fa-money"></i> Info Gaji</a></li>
-                    <li><a href=""><i class="fa fa-user"></i>Verifikasi Member</a></li>
                 @endif
                 @if (Session::has('admin'))
                     <li><a href="{{ route('absenadmin.index') }}"><i class="fa fa-calendar"></i> Absen Admin</a></li>

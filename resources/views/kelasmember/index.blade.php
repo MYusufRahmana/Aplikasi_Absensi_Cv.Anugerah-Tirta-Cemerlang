@@ -146,6 +146,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
+                    <th>No</th>
                     <th>Nama Member</th>
                     <th>Gender</th>
                     <th>Sekolah</th>
@@ -156,10 +157,12 @@
             <tbody>
                 @if ($kelas->isEmpty())
                     <tr>
-                        <td colspan="5">Silahkan Pilih Kelas</td>
+                        <td colspan="6">Silahkan Pilih Kelas</td>
                     </tr>
                 @else
+                <?php $i=1;?>
                     @foreach ($kelas as $item)
+                        <td>{{ $i++ }}</td>
                         <td>{{ $item->Nama }}</td>
                         <td>{{ $item->Gender }}</td>
                         <td>{{ $item->Sekolah }}</td>
@@ -174,7 +177,7 @@
                             <td>Kelas Pemula - Private</td>
                         @endif
                         @if ($item->Kelas == 4)
-                            <td>Jalur Prestas</td>
+                            <td>Jalur Prestasi</td>
                         @endif
                     @endforeach
                 @endif

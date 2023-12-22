@@ -37,7 +37,7 @@ class LoginController extends Controller
 
             if ($user) {
                 if ($user->status == "nonaktif") {
-                    Redirect::back()->with('error', 'Akun Anda Sedang Non-aktif');
+                    return redirect('/login')->with('error', 'Akun Anda Sedang Non-aktif');
                 } else {
 
                     if (Hash::check($request->password, $user->password)) {

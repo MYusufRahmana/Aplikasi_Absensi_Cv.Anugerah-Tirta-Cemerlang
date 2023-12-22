@@ -18,12 +18,12 @@ class AbsensiMemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
     public function index()
     {
         $user_id = session()->get('member')->no;
         $absensi = absensi_member::where('id_user', $user_id)->get();
-        return view('absen.index',compact('absensi'));
+        return view('absen.index', compact('absensi'));
     }
 
     /**
@@ -41,25 +41,28 @@ class AbsensiMemberController extends Controller
     {
         $date = Carbon::now()->format('Y-m-d 00:00:00');
         $id_user = $request->session()->get('member')->no;
-        $validate = $request ->validate([
-            'status'=>'required',
-            "keterangan" =>'string',
+        $absenCount = absensi_member::where('id_user', $id_user)->count();
+        $kelas = $request->session()->get('member')->Kelas;
+        $validate = $request->validate([
+            'status' => 'required',
+            "keterangan" => 'string',
 
         ]);
         if (absensi_member::where('id_user', $id_user)->get()->isEmpty()) {
             absensi_member::create([
-                "status" => $request->validate(['status' => 'required'])['status'],
                 "id_user" => $id_user,
-                "waktu_absen" => now()->format('Y-m-d')
+                'kelas' => $request->session()->get('member')->Kelas,
+                "waktu_absen" => now()->format('Y-m-d'),
+                "status" => $request->validate(['status' => 'required'])['status'],
             ]);
             RiwayatAbsensiMember::create([
-                "id_user" =>$id_user,
-                "kelas"=>$request->session()->get('member')->Kelas,
+                "id_user" => $id_user,
+                "kelas" => $request->session()->get('member')->Kelas,
                 "waktu_absen" => now()->format('Y-m-d'),
-                "status" =>$request->status,
+                "status" => $request->status,
             ]);
-            return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );
-        }else {
+            return redirect()->route('absen.index')->with('success', "Berhasil Absensi");
+        } else {
             if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
                 return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
             }
@@ -67,29 +70,32 @@ class AbsensiMemberController extends Controller
 
         if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
             return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
-        }
-
-        else {
+        } else {
+            if ($kelas== 3 && $absenCount >= 3) {
+                return redirect()->route('absen.index')->with('warning', 'Kamu Telah Mencapai Batas Absen!');
+            } else {
             absensi_member::create([
-                "status" =>$request->validate(['status'=>'required'])['status'],
-                "id_user" =>$id_user,
-                "waktu_absen" => now()->format('Y-m-d')
+                "id_user" => $id_user,
+                "status" => $request->validate(['status' => 'required'])['status'],
+                'kelas' => $request->session()->get('member')->Kelas,
+                "waktu_absen" => now()->format('Y-m-d'),
             ]);
             RiwayatAbsensiMember::create([
-                "id_user" =>$id_user,
-                "kelas"=>$request->session()->get('member')->Kelas,
+                "id_user" => $id_user,
+                "kelas" => $request->session()->get('member')->Kelas,
                 "waktu_absen" => now()->format('Y-m-d'),
-                "status" =>$request->status,
+                "status" => $request->status,
             ]);
+            }
         }
-        return redirect()->route('absen.index')->with('success', "Berhasil Absensi" );
+        return redirect()->route('absen.index')->with('success', "Berhasil Absensi");
     }
 
     /**
      * Display the specified resource.
      */
     public function show(absensi_member $absensi_member)
-    {   
+    {
         //
     }
 

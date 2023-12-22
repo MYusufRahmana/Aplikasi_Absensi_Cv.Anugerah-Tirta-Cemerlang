@@ -135,6 +135,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Waktu</th>
                     <th>Status</th>
@@ -143,41 +144,43 @@
             <tbody id="presensiTable">
                 <tr>
                     @if (Session::get('member')->Kelas == '1')
-                        Kelas Pemula - Reguler
+                    Kelas Pemula - Reguler
                         <p>
                             Pelatih : Namira
                         </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '2')
+                        @endif
+                        @if (Session::get('member')->Kelas == '2')
                         Kelas Pemula - Group
                         <p>
                             Pelatih : Tarmono
                         </p>
                     @endif
                     @if (Session::get('member')->Kelas == '3')
-                        Kelas Pemula - Private
-                        <p>
-                            Pelatih : Nisa / Nurcahya / Darmalela / Ririn / Nazilah / Aji / Agung
+                    Kelas Pemula - Private
+                    <p>
+                        Pelatih : Nisa / Nurcahya / Darmalela / Ririn / Nazilah / Aji / Agung
                         </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '4')
+                        @endif
+                        @if (Session::get('member')->Kelas == '4')
                         Jalur Prestasi
                         <p>
                             Pelatih : Alan / Alex / Kiki / Vira
-
+                            
                         </p>
-                    @endif
-                </tr>
-                @if ($absensi->isEmpty())
+                        @endif
+                    </tr>
+                    @if ($absensi->isEmpty())
                     <tr>
                         <td colspan="3">Silahkan Melakukan Absensi</td>
                     </tr>
-                @else
-                    @foreach ($absensi as $absensi_member)
+                    @else
+                    <?php $i = 1; ?>
+                    @foreach ($absensi as $item)
                         <tr>
-                            <td>{{ $absensi_member->register->Nama }}</td>
-                            <td>{{ date('d M Y', strtotime($absensi_member->waktu_absen)) }}</td>
-                            <td style="background-color: {{ $absensi_member->status == 'Hadir' ? '#4CAF50' : ($absensi_member->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $absensi_member->status }}</td>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $item->register->Nama }}</td>
+                            <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
+                            <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>
                         </tr>
                     @endforeach
                 @endif
