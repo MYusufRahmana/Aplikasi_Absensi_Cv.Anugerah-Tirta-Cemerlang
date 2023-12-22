@@ -174,7 +174,7 @@
                             <td>Kelas Pemula - Private</td>
                         @endif
                         @if ($item->Kelas == 4)
-                            <td>Jalur Prestasi</td>
+                            <td>Jalur Prestas</td>
                         @endif
                     @endforeach
                 @endif
