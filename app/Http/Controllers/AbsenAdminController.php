@@ -40,27 +40,23 @@ class AbsenAdminController extends Controller
             'status'=>'required',
             "keterangan" =>'string',
         ]);
+
         if (AbsenAdmin::where('id_user', $id_user)->get()->isEmpty()) {
             AbsenAdmin::create([
                 "status" => $request->validate(['status' => 'required'])['status'],
                 "id_user" => $id_user,
-                "waktu_absen" => now()->format('Y-m-d')
+                "waktu_absen" => now()->format('Y-m-d 00:00:00')
             ]);
             return redirect()->route('absenadmin.index')->with('success', "Berhasil Absensi" );
         }
-        else {
-            if(AbsenAdmin::find($id_user)->waktu_absen==$date) {
-                return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
-            }
-        }
-        if(AbsenAdmin::find($id_user)->waktu_absen==$date) {
-            return Redirect::back()->with('warning',"Anda Sudah Absen Hari ini");
+        if (AbsenAdmin::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
+            return redirect()->route('absenadmin.index')->with('warning', 'Anda Sudah Absen Hari ini');
         }
         else {
             AbsenAdmin::create([
                 "status" =>$request->validate(['status'=>'required'])['status'],
                 "id_user" =>$id_user,
-                "waktu_absen" => now()->format('Y-m-d')
+                "waktu_absen" => now()->format('Y-m-d 00:00:00')
             ]);
         }
         return redirect()->route('absenadmin.index')->with('success', "Berhasil Absensi" );

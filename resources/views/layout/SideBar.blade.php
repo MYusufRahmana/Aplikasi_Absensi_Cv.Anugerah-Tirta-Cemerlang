@@ -1,4 +1,4 @@
-<div class="left_col scroll-view">
+<div class="left_col scroll-view" style="min-height: 100%; position:fixed">
     <div class="navbar nav_title">
         <div class="navbar nav_title">
             <a href="{{ url("dashboard") }}" class="">
@@ -29,6 +29,7 @@
                     <li><a href="{{ route('absenadmin.index') }}"><i class="fa fa-calendar"></i> Absen Admin</a></li>
                     {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Daftar Member</a></li> --}}
                     <li><a href="{{ route('pelatih.index') }}"><i class="fa fa-user-plus"></i> Kelola Pelatih</a></li>
+                    <li><a href="{{ route('member.index') }}"><i class="fa fa-user-plus"></i> Kelola Member</a></li>
                     <li><a href="{{ route('laporan.index') }}"><i class="fa fa-file"></i> Verifikasi Absensi Pelatih</a></li>
                     {{-- <li><a href="{{url('/laporan')}}"><i class="fa fa-file"></i> Laporan Pelatih</a></li> --}}
                     <li><a href="{{route('laporanabsenmember.index')}}"><i class="fa fa-file"></i> Laporan Absensi Member</a></li>

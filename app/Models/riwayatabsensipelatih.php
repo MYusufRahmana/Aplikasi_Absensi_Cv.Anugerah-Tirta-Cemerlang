@@ -9,7 +9,7 @@ class riwayatabsensipelatih extends Model
 {
     use HasFactory;
     protected $guarded = 'id';
-    protected $fillable = ['id_user','kelas','waktu_absen','status'];
+    protected $fillable = ['id_user','kelas','waktu_absen','status','kelas'];
     protected $table = "riwayat_absensi_pelatihs";
 
     public function pelatih() {

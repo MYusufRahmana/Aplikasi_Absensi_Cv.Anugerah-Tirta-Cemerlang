@@ -14,6 +14,6 @@ class Admin extends Model
     use HasFactory;
 
     public function AbsenAdmin() {
-        return $this->belongsTo(AbsenAdmin::class,'id','id');
+        return $this->belongsTo(AbsenAdmin::class,'id','id_user');
     }
 }

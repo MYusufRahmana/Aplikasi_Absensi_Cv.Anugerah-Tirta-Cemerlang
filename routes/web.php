@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaporanAbsenMember;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PengajianPelatihController;
 use App\Http\Controllers\ProfileController;
@@ -40,6 +41,7 @@ Route::resource('profile', ProfileController::class);
 Route::resource('riwayatabsen', RiwayatAbsenMemberController::class);
 Route::resource('riwayatabsenpelatih', RiwayatAbsensiPelatihController::class);
 Route::resource('pelatih', PelatihController::class);
+Route::resource('member', MemberController::class);
 
 Route::resource('gajipelatih',GajiPelatihController::class);
 
