@@ -10,7 +10,7 @@ class Admin extends Model
 {
     protected $table = 'admins';
     protected $guarded= 'id';
-    protected $fillable = ['username','password','nama','hp','role'];
+    protected $fillable = ['username','password','nama','hp','role','status'];
     use HasFactory;
 
     public function AbsenAdmin() {

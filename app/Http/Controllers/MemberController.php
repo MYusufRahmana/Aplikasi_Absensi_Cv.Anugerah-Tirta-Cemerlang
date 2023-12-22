@@ -73,8 +73,9 @@ class MemberController extends Controller
                 'Sekolah'=>$request->Sekolah,
                 'Health'=>$request->Health,
                 'Kelas'=>$request->Kelas,
+                'status'=>$request->status,
             ]);
-            return Redirect::back()->with('success','Berhasil mengubah data');
+            return redirect('/member')->with('success','Berhasil mengubah data');
         }
         else {
             return Redirect::back()->with('error','Gagal mengubah data');

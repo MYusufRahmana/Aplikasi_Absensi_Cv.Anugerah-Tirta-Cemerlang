@@ -12,7 +12,7 @@ class register extends Model
     protected $primaryKey = 'no';
     protected $guarded = "no";
     protected $table = 'registers';
-    protected $fillable = ['no','Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password','role'];
+    protected $fillable = ['no','Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password',"status",'role'];
 
     public function riwayatabsensimember() {
         return $this->belongsTo(riwayatabsensimember::class,'No','id_user');

@@ -60,15 +60,15 @@ class PelatihController extends Controller
      */
     public function update(Request $request, String $id)
     {
-        $gaji = intval($request->gaji);
+        $status=$request->status;
         $pelatih=pelatih::find($id);
 
         $validatedData=$request->validate([
-            'gaji'=>'required|numeric', 
+            'status'=>'required|string', 
          ]);
          if($validatedData) {
              $pelatih->update([
-                 'gaji'=>$gaji
+                 'status'=>$status
              ]);
              return redirect('/pelatih')->with('success',"Gaji Telah Diperbarui");
          }

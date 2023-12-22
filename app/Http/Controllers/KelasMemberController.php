@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\pelatih;
+use App\Models\register;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
-class PengajianPelatihController extends Controller
+class KelasMemberController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('penggajianPelatih.index',[
-            "pelatih" =>pelatih::all()
+        $idKelas= register::where('kelas',$request->kelas)->get();
+        return view('kelasmember.index',[
+            'kelas'=>$idKelas
         ]);
     }
 
@@ -31,15 +31,13 @@ class PengajianPelatihController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request)
     {
-        //
     }
 
     /**
@@ -47,10 +45,7 @@ class PengajianPelatihController extends Controller
      */
     public function edit(string $id)
     {
-        $pelatih = pelatih::find($id);
-        return view('penggajianpelatih.edit',[
-            "pelatih"=>$pelatih
-        ]);
+        //
     }
 
     /**
@@ -58,19 +53,7 @@ class PengajianPelatihController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $gaji = intval($request->gaji);
-        $pelatih=pelatih::find($id);
-
-        $validatedData=$request->validate([
-            'gaji'=>'required|numeric', 
-         ]);
-         if($validatedData) {
-             $pelatih->update([
-                 'gaji'=>$gaji
-             ]);
-             return Redirect::back()->with('success',"Gaji Telah Diperbarui");
-         }   
-
+        //
     }
 
     /**

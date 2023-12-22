@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('gbr');
             $table->timestamps();
             $table->string('password');
+            $table->string('status');
             $table->enum('role', ['member', 'pelatih', 'admin']);
         });
     }

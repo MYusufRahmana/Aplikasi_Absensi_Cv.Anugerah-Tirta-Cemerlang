@@ -37,7 +37,7 @@
                             <th>Nama</th>
                             <th>Hp</th>
                             <th>Alamat</th>
-                            <th>Gaji</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -47,7 +47,11 @@
                                 <td>{{ $item->Nama_Pelatih }}</td>
                                 <td>{{ $item->Hp }}</td>
                                 <td>{{ $item->Alamat }}</td>
-                                <td>{{ 'Rp ' . number_format($item->gaji, 0, ',', '.') }}</td>
+                                @if ($item->status==1)
+                                    <td>Aktif</td>
+                                @else
+                                    <td>Non-Aktif</td>    
+                                @endif
                                 <td class="">
                                     <a href="{{ route('pelatih.edit', $item->id) }}"><button class="btn btn-warning">Edit</button></a>
                                     <form action="">
