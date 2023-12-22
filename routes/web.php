@@ -1,26 +1,21 @@
 <?php
 
 use App\Http\Controllers\AbsenAdminController;
-use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\AbsensiMemberController;
 use App\Http\Controllers\AbsensiPelatihController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GajiPelatihController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KelasMemberController;
 use App\Http\Controllers\LaporanAbsenMember;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PelatihController;
-use App\Http\Controllers\PengajianPelatihController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\RiwayatAbsenMember;
 use App\Http\Controllers\RiwayatAbsenMemberController;
 use App\Http\Controllers\RiwayatAbsensiPelatihController;
-use App\Models\AbsenAdmin;
-use App\Models\register;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');
@@ -48,6 +43,9 @@ Route::resource('gajipelatih',GajiPelatihController::class);
 Route::resource('laporan', LaporanController::class);
 Route::resource('laporanabsenmember', LaporanAbsenMember::class);
 
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
-// require __DIR__ . '/auth.php';
+Route::resource('kelasmember', KelasMemberController::class);
 
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+
+Route::get('/laporanpelatih', [PDFController::class,'index']);
+Route::get('/laporanpelatih/cetak_pdf', [PDFController::class,'cetak_pdf']);

@@ -23,22 +23,24 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Pelatih</h5>
                         <div class="ml-3">
-                            <p for="" style="margin-left:-10px; font-size:14px" class="col-lg-2">Nama Pelatih :</p>
-                            <p style="font-size:14px"> {{ Session::get('pelatih')->Nama_Pelatih }}</p>
+                            <p for="" style="font-size:14px" class="col-lg-2">Nama Pelatih</p>
+                            <p style="font-size:14px">: {{ Session::get('pelatih')->Nama_Pelatih }}</p>
                         </div>
                         <div class="ml-3">
-                            <p for="" style="margin-left:-10px; font-size:14px" class="col-lg-2">Gaji Setiap Hadir :</p>
-                            <p style="font-size:14px"> {{ 'Rp ' . number_format(Session::get('pelatih')->gaji , 0, ',', '.')}}</p>
+                            <p for="" style="font-size:14px; margin-left:0.7vw">Jumlah Hadir Kelas:</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" class="col-lg-2">Kelas Regular - Pemula</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" >: {{ $k1 }}</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" class="col-lg-2">Kelas Regular - Group</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" >: {{ $k2 }}</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" class="col-lg-2">Kelas Regular - Private</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" >: {{ $k3 }}</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" class="col-lg-2">Jalur Prestasi</p>
+                            <p for="" style="font-size:14px; margin-left:1vw" >: {{ $k4 }}</p>
                         </div>
                         <div class="ml-3">
-                            <p for="" style="margin-left:-10px; font-size:14px" class="col-lg-2">Total Absensi Hadir :</p>
-                            <p style="font-size:14px"> {{ $jumlahAbsen }}</p>
-                        </div>
-                        <div class="ml-3">
-                            <p for="" style="margin-left:-10px; font-size:14px" class="col-lg-2">Gaji Yang Diterima :</p>
-                            <p style="font-size:14px"> {{'Rp ' . number_format(Session::get('pelatih')->gaji*$jumlahAbsen , 0, ',', '.')}}</p>
+                            <p for="" style="font-size:14px" class="col-lg-2">Total Gaji</p>
+                            <p style="font-size:14px">: {{'Rp ' . number_format(($k1*50000)+($k2*50000)+($k3*80000)+($k4*50000) , 0, ',', '.')}}</p>
                         </div>
                     </div>
                 </div>

@@ -35,6 +35,7 @@
                             <th>Kesehatan</th>
                             <th>Kelas</th>
                             <th>No Handphone</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="presensiTable">
@@ -43,20 +44,25 @@
                                 <td>{{ $item->Nama }}</td>
                                 <td>{{ $item->Sekolah }}</td>
                                 <td>{{ $item->Health }}</td>
-                                @if ($item->Kelas =="1") 
+                                @if ($item->Kelas == '1')
                                     <td>Kelas Pemula - Reguler</td>
                                 @endif
-                                @if ($item->Kelas =="2") 
+                                @if ($item->Kelas == '2')
                                     <td>Kelas Pemula - Group</td>
                                 @endif
-                                @if ($item->Kelas =="3") 
+                                @if ($item->Kelas == '3')
                                     <td>Kelas Pemula - Private</td>
                                 @endif
-                                @if ($item->Kelas =="4") 
+                                @if ($item->Kelas == '4')
                                     <td>Jalur Prestasi</td>
                                 @endif
                                 {{-- <td>{{ $item->Kelas }}</td> --}}
                                 <td>{{ $item->Hp }}</td>
+                                @if ($item->status == 1)
+                                    <td>Aktif</td>
+                                @else
+                                    <td>Non-Aktif</td>
+                                @endif
                                 <td class="">
                                     <a href="{{ route('member.edit', $item->no) }}"><button class="btn btn-warning">Edit</button></a>
                                     <form action="">

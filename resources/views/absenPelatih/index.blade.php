@@ -169,8 +169,8 @@
             <div class="form-content">
                 <span class="close-btn" onclick="closePresensiForm()">&times;</span>
                 <h3 class="text-center">Form Presensi Mandiri Pelatih</h3>
-                <div class="form-select content-center radio-group">
-                    <select name="kelas" id="kelas" class="form-select">
+                <div class="form-select content-center radio-group" style="margin-bottom: 2vh">
+                    <select name="kelas" id="kelas" class="form-control form-select">
                         <option value="1">Kelas Pemula - Group</option>
                         <option value="2">Kelas Pemula - Reguler</option>
                         <option value="3">Kelas Pemula - Private</option>

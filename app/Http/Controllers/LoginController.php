@@ -8,6 +8,7 @@ use App\Models\register;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -35,28 +36,30 @@ class LoginController extends Controller
             };
 
             if ($user) {
-                if (Hash::check($request->password, $user->password)) {
-                    if (($user->role == "member")) {
-                        Session::put('member', $user);
-                    }
+                if ($user->status == "nonaktif") {
+                    Redirect::back()->with('error', 'Akun Anda Sedang Non-aktif');
+                } else {
+
                     if (Hash::check($request->password, $user->password)) {
-                        if ($user->role == "pelatih") {
-                            Session::put('pelatih', $user);
+                        if (($user->role == "member")) {
+                            Session::put('member', $user);
                         }
-                    }
-                    if (Hash::check($request->password, $user->password)) {
-                        if ($user->role == "admin") {
-                            Session::put('admin', $user);
+                        if (Hash::check($request->password, $user->password)) {
+                            if ($user->role == "pelatih") {
+                                Session::put('pelatih', $user);
+                            }
                         }
-                    }
-                    return redirect('/dashboard');
-                };
-                {
-                    return redirect('/login')->with('error',"Your login credentials don't match an account in our system");
+                        if (Hash::check($request->password, $user->password)) {
+                            if ($user->role == "admin") {
+                                Session::put('admin', $user);
+                            }
+                        }
+                        return redirect('/dashboard');
+                    };
+                    return redirect('/login')->with('error', "Your login credentials don't match an account in our system");
                 }
-            }
-            else {
-                return redirect('/login')->with('error',"Your login credentials don't match an account in our system");
+            } else {
+                return redirect('/login')->with('error', "Your login credentials don't match an account in our system");
             }
         }
     }

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'Jl. Jalan',
             'Hp' => '081234567890',
             'gbr' => 'default.jpg',
+            'status' => 1,
             'password' => bcrypt('yusuf'),
             'role' => 'member',
         ]);
@@ -48,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'Jl. Jalan',
             'Hp' => '081234567890',
             'gbr' => 'default.jpg',
+            'status' => 1,
             'password' => bcrypt('andi'),
             'role'=>'member',
         ]);
@@ -61,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'jln harapan 1',
             'Username' => 'pelatih',
             'role' => 'pelatih',
-            'gaji' => 0,
+            'status' => 1,
         ]);
 
         DB::table('t_pelatih')->insert([
@@ -73,7 +75,7 @@ class DatabaseSeeder extends Seeder
             'Alamat' => 'jln harapan 1',
             'Username' => 'pelatih',
             'role' => 'pelatih',
-            'gaji' => 0,
+            'status' => 1,
         ]);
 
         DB::table('admins')->insert([

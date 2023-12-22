@@ -123,100 +123,64 @@
     </head>
 
     <body>
-        <h2>Pertemuan</h2>
-        @if (Session::has('success'))
+        <h5>List Kelas</h5>
+        <form action="{{ route('kelasmember.index') }}" method="GET">
+            @csrf
+            <div class="form-select">
+                <select name="kelas" id="kelas" class="form-control">
+                    <option value="1">Kelas Pemula - Pemula</option>
+                    <option value="2">Kelas Pemula - Group</option>
+                    <option value="3">Kelas Pemula - Private</option>
+                    <option value="4">Jalur Prestasi</option>
+                </select>
+            </div>
+            <input type="submit" value="Tampilkan" class="btn btn-info" style="float: right; margin-top:1rem; margin-bottom:-1rem;">
+        </form>
+        {{-- @if (Session::has('success'))
             <div class="alert alert-success">{{ Session::get('success') }}</div>
         @endif
         @if (Session::has('warning'))
             <div class="alert alert-warning">{{ Session::get('warning') }}</div>
-        @endif
-        <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
+        @endif --}}
 
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
-                    <th>Nama</th>
-                    <th>Waktu</th>
-                    <th>Status</th>
+                    <th>Nama Member</th>
+                    <th>Gender</th>
+                    <th>Sekolah</th>
+                    <th>No.Handphone</th>
+                    <th>Kelas</th>
                 </tr>
             </thead>
-            <tbody id="presensiTable">
-                <tr>
-                    @if (Session::get('member')->Kelas == '1')
-                        Kelas Pemula - Reguler
-                        <p>
-                            Pelatih : Namira
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '2')
-                        Kelas Pemula - Group
-                        <p>
-                            Pelatih : Tarmono
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '3')
-                        Kelas Pemula - Private
-                        <p>
-                            Pelatih : Nisa / Nurcahya / Darmalela / Ririn / Nazilah / Aji / Agung
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '4')
-                        Jalur Prestasi
-                        <p>
-                            Pelatih : Alan / Alex / Kiki / Vira
-
-                        </p>
-                    @endif
-                </tr>
-                @if ($absensi->isEmpty())
+            <tbody>
+                @if ($kelas->isEmpty())
                     <tr>
-                        <td colspan="3">Silahkan Melakukan Absensi</td>
+                        <td colspan="5">Silahkan Pilih Kelas</td>
                     </tr>
                 @else
-                    @foreach ($absensi as $absensi_member)
-                        <tr>
-                            <td>{{ $absensi_member->register->Nama }}</td>
-                            <td>{{ date('d M Y', strtotime($absensi_member->waktu_absen)) }}</td>
-                            <td style="background-color: {{ $absensi_member->status == 'Hadir' ? '#4CAF50' : ($absensi_member->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $absensi_member->status }}</td>
-                        </tr>
+                    @foreach ($kelas as $item)
+                        <td>{{ $item->Nama }}</td>
+                        <td>{{ $item->Gender }}</td>
+                        <td>{{ $item->Sekolah }}</td>
+                        <td>{{ $item->Hp }}</td>
+                        @if ($item->Kelas == 1)
+                            <td>Kelas Pemula - Pemula</td>
+                        @endif
+                        @if ($item->Kelas == 2)
+                            <td>Kelas Pemula - Group</td>
+                        @endif
+                        @if ($item->Kelas == 3)
+                            <td>Kelas Pemula - Private</td>
+                        @endif
+                        @if ($item->Kelas == 4)
+                            <td>Jalur Prestasi</td>
+                        @endif
                     @endforeach
                 @endif
+                <tr>
             </tbody>
         </table>
-
-        <!-- Form presensi mandiri -->
-        <form action="{{ route('absen.store', Session::get('member')->no) }}" method="post">
-            @csrf
-            <div class="presensi-form" id="presensiForm">
-                <div class="form-content">
-                    <span class="close-btn" onclick="closePresensiForm()">&times;</span>
-                    <h3 class="text-center">Form Presensi Mandiri</h3>
-                    <div class="radio-group">
-                        <div class="radio-label">
-                            <input type="radio" id="hadir" name="status" value="Hadir" required>
-                            <label for="hadir">Hadir</label>
-                        </div>
-                    </div>
-                    <button class="submit-btn" type="submit">Submit</button>
-                </div>
-            </div>
-        </form>
-
-        <script>
-            function openPresensiForm() {
-                document.getElementById('presensiForm').style.display = 'block';
-            }
-
-            function closePresensiForm() {
-                document.getElementById('presensiForm').style.display = 'none';
-            }
-
-            window.onclick = function(event) {
-                if (event.target === document.getElementById('presensiForm')) {
-                    closePresensiForm();
-                }
-            }
-        </script>
     </body>
 
     </html>

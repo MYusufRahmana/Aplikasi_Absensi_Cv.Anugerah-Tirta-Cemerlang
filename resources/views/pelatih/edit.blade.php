@@ -50,10 +50,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="gaji" class="col-sm-3 col-form-label">Gaji</label>
+                                <label for="status" class="col-sm-3 col-form-label">Status</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control form-number" id="gaji" value="{{ $pelatih->gaji }}" placeholder="Masukkan Gaji" name ="gaji">
+                                    <select name="status" id="status" class="form-control form-select">
+                                        <option value="1">Aktif</option>
+                                        <option value="nonaktif">Non-Aktif</option>
+                                    </select>
                                 </div>
+                            </div>
                             <button type="submit" class="btn btn-success mr-2">Submit</button>
                             <a href="{{ route('pelatih.index') }}" class="btn btn-warning">Cancel</a>
                         </form>

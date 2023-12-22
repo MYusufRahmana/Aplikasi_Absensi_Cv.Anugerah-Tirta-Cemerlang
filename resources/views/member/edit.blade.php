@@ -66,6 +66,15 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="status" class="col-sm-3 col-form-label">Status</label>
+                                <div class="col-sm-9">
+                                    <select name="status" id="status" class="form-control form-select">
+                                        <option value="1">Aktif</option>
+                                        <option value="nonaktif">Non-Aktif</option>
+                                    </select>
+                                </div>
+                            </div>
                             <button type="submit" class="btn btn-success mr-2">Submit</button>
                             <a href="{{ route('member.index') }}" class="btn btn-warning">Cancel</a>
                         </form>
