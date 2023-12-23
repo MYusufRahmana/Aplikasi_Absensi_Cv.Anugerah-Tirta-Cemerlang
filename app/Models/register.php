@@ -11,7 +11,7 @@ class register extends Model
     use HasFactory;
     protected $primaryKey = 'no';
     protected $guarded = "no";
-    protected $table = 'registers';
+    protected $table = 'register';
     protected $fillable = ['no','Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password',"status",'role'];
 
     public function riwayatabsensimember() {

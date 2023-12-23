@@ -171,7 +171,7 @@
                     </tr>
                     @if ($absensi->isEmpty())
                     <tr>
-                        <td colspan="3">Silahkan Melakukan Absensi</td>
+                        <td colspan="4">Silahkan Melakukan Absensi</td>
                     </tr>
                     @else
                     <?php $i = 1; ?>

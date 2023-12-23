@@ -64,7 +64,7 @@
                 <tr>
                     <td>{{ $i++ }}</td>
                     <td>{{ $item->Nama_Pelatih }}</td>
-                    <td>{{ $totalGaji[$item->id] }}</td>
+                    <td>Rp.{{number_format($totalGaji[$item->id] ?? 0, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>

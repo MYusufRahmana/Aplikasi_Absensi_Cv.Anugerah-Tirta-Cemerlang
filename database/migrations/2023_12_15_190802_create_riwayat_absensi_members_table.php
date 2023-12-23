@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('riwayat_absensi_members', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('no')->on('registers')->onDelete('cascade');
+            $table->foreign('id_user')->references('no')->on('register')->onDelete('cascade');
             $table->string('kelas');
             $table->datetime('waktu_absen');
             $table->string('status');

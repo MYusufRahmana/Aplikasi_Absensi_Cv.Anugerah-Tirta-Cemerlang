@@ -71,9 +71,13 @@ class AbsensiMemberController extends Controller
         if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
             return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
         } else {
-            if ($kelas== 3 && $absenCount >= 3) {
-                return redirect()->route('absen.index')->with('warning', 'Kamu Telah Mencapai Batas Absen!');
-            } else {
+            if ($kelas== 3 && $absenCount >= 1) {
+                return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
+            }
+            if ($kelas== 2 && $absenCount >= 1) {
+                return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
+            }
+            else {
             absensi_member::create([
                 "id_user" => $id_user,
                 "status" => $request->validate(['status' => 'required'])['status'],
