@@ -1,44 +1,16 @@
-{{-- @extends('mainmenu')
-@section('Halaman Absen')
-@section('content') --}}
-@include('layouts.style')
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
         <title>Data Absen</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <style>
             body {
                 background-color: white
             }
-            body {
-                font-family: 'Arial', sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
-            }
-
             h2 {
                 text-align: center;
                 margin-bottom: 20px;
             }
-
-            .add-btn {
-                float: right;
-                margin-bottom: 10px;
-                background-color: #4CAF50;
-                color: white;
-                text-decoration: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                transition: background-color 0.3s;
-            }
-
-            .add-btn:hover {
-                background-color: #45a049;
-            }
-
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -51,27 +23,30 @@
             td {
                 border: 1px solid #ddd;
                 padding: 12px;
-                text-align: center;
+                text-align: center
             }
 
-            th {
+            tr th {
                 background-color: #f2f2f2;
+                text-align: center;
             }
 
             tr:nth-child(even) {
                 background-color: #f9f9f9;
             }
+            
         </style>
+        <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
 
     <body>
         <div class="container">
             <h2>Laporan Pelatih</h2>
-            <a href={{ url('/laporanpelatih/cetak_pdf') }} class="btn btn-primary">Cetak PDF</a>
         </div>
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
+        <a href={{ url('/laporanpelatih/cetak_pdf') }} class="btn btn-success" style="margin-left: 1rem">Cetak PDF</a>
+        <table class="table table-bordered" >
+            <thead class="thead-light" >
+                <tr >
                     <th>No</th>
                     <th>Nama Pelatih</th>
                     <th>Total Gaji</th>
@@ -83,6 +58,7 @@
                     <tr>
                         <td>{{ $i++ }}</td>
                         <td>{{$item->Nama_Pelatih}}</td>
+                        <td>{{ $totalGaji[$item->id] }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -90,4 +66,3 @@
     </body>
 
     </html>
-{{-- @endsection --}}

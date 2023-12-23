@@ -29,7 +29,6 @@ Route::resource('absenpelatih', AbsensiPelatihController::class);
 Route::resource('absenadmin', AbsenAdminController::class);
 
 Route::resource('home', HomeController::class);
-// Route::resource('jumlah', RegisterController::class);
 
 Route::resource('profile', ProfileController::class);
 

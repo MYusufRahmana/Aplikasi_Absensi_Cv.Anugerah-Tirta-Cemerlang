@@ -1,27 +1,55 @@
-@extends('mainmenu')
-@section('Halaman Absen')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
 
-    <!DOCTYPE html>
-    <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            background-color: white
+        }
 
-    <head>
-        <title>Data Absen</title>
+        .table-striped {
+            background-color: #DBDFEA;
+        }
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <style>
-            td,
-            th {
-                text-align: center;
-            }
-        </style>
-    </head>
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
 
-    <body>
-        <h4 style="margin-bottom:2rem">Laporan Member</h4>
-        <a href="{{ route('laporanabsenmember.create') }}" class="btn btn-primary" style="float: right; padding:1rem;">Cetak PDF</a>
-        <h5>Kelas Pemula</h5>
-        @foreach([1, 2, 3, 4] as $kelas)
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center
+        }
+
+        tr th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fluids text-center">
+        <h2>Laporan Absen Member</h2>
+    </div>
+    @foreach([1, 2, 3, 4] as $kelas)
         <h5>Kelas Pemula - {{ $kelas == 4 ? 'Jalur Prestasi' : ($kelas == 3 ? 'Private' : ($kelas == 2 ? 'Group' : 'Reguler')) }}</h5>
         <table class="table table-bordered">
             <thead class="thead-light">
@@ -48,7 +76,8 @@
             </tbody>
         </table>
     @endforeach
-    </body>
 
-    </html>
-@endsection
+    {{-- @include('layouts.script') --}}
+</body>
+
+</html>
