@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\absensi_member;
-use App\Models\riwayatabsensimember;
+use App\Models\register;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanAbsenMember extends Controller
 {
@@ -14,9 +14,19 @@ class LaporanAbsenMember extends Controller
      */
     public function index()
     {
-        $member = absensi_member::get();
-        return view('laporanabsenmember.index',[
-            'member'=>$member,
+        $member = register::get();
+        $idAbsenMember = absensi_member::get('id_user');
+        $absenCounts = [];
+
+        foreach ($idAbsenMember as $item) {
+            $id=$item->id_user;
+            $absenCount = absensi_member::where('id_user', $id)
+                ->whereBetween('kelas', [1, 4])->get()->count();
+            $absenCounts[$id] = $absenCount;
+        }
+        return view('laporanabsenmember.index', [
+            'member' => $member,
+            'absenCounts' => $absenCounts,
         ]);
     }
 
@@ -25,7 +35,19 @@ class LaporanAbsenMember extends Controller
      */
     public function create()
     {
-        //
+        $member = register::get();
+        $idAbsenMember = absensi_member::get('id_user');
+        $absenCounts = [];
+
+        foreach ($idAbsenMember as $item) {
+            $id=$item->id_user;
+            $absenCount = absensi_member::where('id_user', $id)
+                ->whereBetween('kelas', [1, 4])->get()->count();
+            $absenCounts[$id] = $absenCount;
+        }
+
+        $pdf = PDF::loadview('laporanabsenmember.pdf', ['member' => $member,'absenCounts'=>$absenCounts]);
+        return $pdf->download('Laporan_Member.pdf');
     }
 
     /**

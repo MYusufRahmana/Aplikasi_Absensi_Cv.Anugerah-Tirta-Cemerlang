@@ -135,6 +135,7 @@
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
+                    <th>No</th>
                     <th>Nama</th>
                     <th>Waktu</th>
                     <th>Status</th>
@@ -143,11 +144,13 @@
             <tbody id="presensiTable">
                 @if ($absensi->isEmpty())
                     <tr>
-                        <td colspan="3">Silahkan Melakukan Absensi</td>
+                        <td colspan="4">Silahkan Melakukan Absensi</td>
                     </tr>
                 @else
+                <?php $i=1;?>
                     @foreach ($absensi as $item)
                         <tr>
+                            <td>{{ $i++ }}</td>
                             <td>{{ $item->admin->nama}}</td>
                             <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
                             <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>

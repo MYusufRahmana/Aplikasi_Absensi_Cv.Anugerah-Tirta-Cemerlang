@@ -135,6 +135,7 @@
     <table class="table table-bordered">
         <thead class="thead-light">
             <tr>
+                <th>No</th>
                 <th>Nama Pelatih</th>
                 <th>Waktu</th>
                 <th>Status</th>
@@ -146,11 +147,13 @@
                 <span>Silahkan Mengabsen</span>
             </td>
             @endif
+            <?php $i=1;?>
             @foreach($absensi as $absensi_pelatih)
             {{-- @if($absensi_pelatih->isEmpty())
             <span>Belum Ada Absen</span>
             @endif --}}
             <tr>
+                <td>{{ $i++ }}</td>
                 <td>{{ ($absensi_pelatih->pelatih->Nama_Pelatih)}}</td>
                 <td>{{ date('d M Y', strtotime($absensi_pelatih->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
