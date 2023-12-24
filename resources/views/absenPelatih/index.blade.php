@@ -143,7 +143,7 @@
         </thead>
         <tbody id="presensiTable">
             @if($absensi->isEmpty())
-            <td colspan="3">
+            <td colspan="4">
                 <span>Silahkan Mengabsen</span>
             </td>
             @endif

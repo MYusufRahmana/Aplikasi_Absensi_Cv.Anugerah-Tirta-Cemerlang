@@ -50,6 +50,17 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="kelas" class="col-sm-3 col-form-label">Kelas</label>
+                            <div class="col-sm-9">
+                                <select name="kelas" id="" class=" form-control">
+                                    <option value="1">Kelas Renang - Pemula</option>
+                                    <option value="2">Kelas Renang - Group</option>
+                                    <option value="3">Kelas Renang - Private</option>
+                                    <option value="4">Jalur Prestasi</option>
+                                </select>
+                            </div>
+                        </div>
+                            <div class="form-group row">
                                 <label for="status" class="col-sm-3 col-form-label">Status</label>
                                 <div class="col-sm-9">
                                     <select name="status" id="status" class="form-control form-select">

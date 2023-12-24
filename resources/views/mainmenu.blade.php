@@ -132,7 +132,7 @@
                 <div class="row tile_count">
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Jumlah Member</span>
-                        <div class="count">{{ DB::table('registers')->count() }}</div>
+                        <div class="count">{{ DB::table('register')->count() }}</div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Jumlah Pelatih</span>
@@ -140,11 +140,11 @@
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Total Laki-laki</span>
-                        <div class="count green">{{ $countMaleMembers = DB::table('registers')->where('gender', 'Laki-laki')->count() }}</div>
+                        <div class="count green">{{ $countMaleMembers = DB::table('register')->where('gender', 'Laki-laki')->count() }}</div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Total Perempuan</span>
-                        <div class="count red">{{ $countMaleMembers = DB::table('registers')->where('gender', 'Perempuan')->count() }}</div>
+                        <div class="count red">{{ $countMaleMembers = DB::table('register')->where('gender', 'Perempuan')->count() }}</div>
                     </div>
                 </div>
                 @yield('content')

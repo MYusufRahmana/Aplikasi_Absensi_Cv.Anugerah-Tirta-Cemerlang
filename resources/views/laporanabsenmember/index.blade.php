@@ -18,9 +18,8 @@
     </head>
 
     <body>
-        <h4 style="margin-bottom:2rem">Laporan Member</h4>
+        <h4 style="margin-bottom:2rem">Laporan Kelas Member</h4>
         <a href="{{ route('laporanabsenmember.create') }}" class="btn btn-primary" style="float: right; padding:1rem;">Cetak PDF</a>
-        <h5>Kelas Pemula</h5>
         @foreach([1, 2, 3, 4] as $kelas)
         <h5>Kelas Pemula - {{ $kelas == 4 ? 'Jalur Prestasi' : ($kelas == 3 ? 'Private' : ($kelas == 2 ? 'Group' : 'Reguler')) }}</h5>
         <table class="table table-bordered">

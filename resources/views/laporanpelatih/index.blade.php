@@ -1,16 +1,24 @@
+@extends('mainmenu')
+@section('Halaman Absen')
+@section('content')
+
     <!DOCTYPE html>
     <html lang="en">
 
     <head>
         <title>Data Absen</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <style>
             body {
                 background-color: white
             }
+
             h2 {
                 text-align: center;
                 margin-bottom: 20px;
             }
+
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -34,19 +42,14 @@
             tr:nth-child(even) {
                 background-color: #f9f9f9;
             }
-            
         </style>
-        <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
 
     <body>
-        <div class="container">
-            <h2>Laporan Pelatih</h2>
-        </div>
         <a href={{ url('/laporanpelatih/cetak_pdf') }} class="btn btn-success" style="margin-left: 1rem">Cetak PDF</a>
-        <table class="table table-bordered" >
-            <thead class="thead-light" >
-                <tr >
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
                     <th>No</th>
                     <th>Nama Pelatih</th>
                     <th>Total Gaji</th>
@@ -57,12 +60,13 @@
                 @foreach ($pelatih as $item)
                     <tr>
                         <td>{{ $i++ }}</td>
-                        <td>{{$item->Nama_Pelatih}}</td>
-                        <td>{{ $totalGaji[$item->id] }}</td>
+                        <td>{{ $item->Nama_Pelatih }}</td>
+                        <td>Rp.{{number_format($totalGaji[$item->id] ?? 0, 0, ',', '.') }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </body>
+@endsection
 
-    </html>
+</html>

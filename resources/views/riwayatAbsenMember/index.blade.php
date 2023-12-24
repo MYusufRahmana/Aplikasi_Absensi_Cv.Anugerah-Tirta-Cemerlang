@@ -161,7 +161,7 @@
             <tbody id="presensiTable">
                 @if ($user->isEmpty())
                     <tr>
-                        <td colspan="4" style="text-align: center">Tidak ada data absensi.</td>
+                        <td colspan="5" style="text-align: center">Tidak ada data absensi.</td>
                     </tr>
                 @else
                     <?php $i = 1; ?>
