@@ -87,6 +87,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Hp</th>
+                            <th>Kelas</th>
                             <th>Alamat</th>
                             <th colspan="2">Status</th>
                         </tr>
@@ -98,6 +99,9 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $item->Nama_Pelatih }}</td>
                                 <td>{{ $item->Hp }}</td>
+                                <td>
+                                    {{ $item->kelas == 1 ? 'Kelas Renang - Pemula' : ($item->kelas == 2 ? 'Kelas Renang - Group' : ($item->kelas == 3 ? 'Kelas Pemula - Private' : 'Jalur Prestasi')) }}
+                                </td>
                                 <td>{{ $item->Alamat }}</td>
                                 @if ($item->status==1)
                                     <td>Aktif</td>
@@ -106,8 +110,9 @@
                                 @endif
                                 <td class="">
                                     <a href="{{ route('pelatih.edit', $item->id) }}"><button class="btn btn-warning">Edit</button></a>
-                                    <form action="">
+                                    <form action="{{ route('pelatih.destroy',$item->id) }}"method="POST">
                                         @csrf
+                                        @method('delete')
                                         <input type="submit" value="Hapus" class="btn btn-danger tambah">
                                     </form>
                                 </td>

@@ -9,6 +9,7 @@ use App\Models\RiwayatAbsensiMember;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use League\Flysystem\UnableToRetrieveMetadata;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -23,7 +24,17 @@ class AbsensiMemberController extends Controller
     {
         $user_id = session()->get('member')->no;
         $absensi = absensi_member::where('id_user', $user_id)->get();
-        return view('absen.index', compact('absensi'));
+        $pelatih1 = DB::table('t_pelatih')->where('kelas','1')->get();
+        $pelatih2 = DB::table('t_pelatih')->where('kelas','2')->get();
+        $pelatih3 = DB::table('t_pelatih')->where('kelas','3')->get();
+        $pelatih4 = DB::table('t_pelatih')->where('kelas','4')->get();
+        return view('absen.index', [
+            'absensi'=>$absensi,
+            'pelatih1'=>$pelatih1,
+            'pelatih2'=>$pelatih2,
+            'pelatih3'=>$pelatih3,
+            'pelatih4'=>$pelatih4,
+        ]);
     }
 
     /**
@@ -71,10 +82,11 @@ class AbsensiMemberController extends Controller
         if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
             return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
         } else {
-            if ($kelas== 3 && $absenCount >= 1) {
-                return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
-            }
+            // if ($kelas== 3 && $absenCount >= 1) {
+            //     return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
+            // }
             if ($kelas== 2 && $absenCount >= 1) {
+                                
                 return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
             }
             else {

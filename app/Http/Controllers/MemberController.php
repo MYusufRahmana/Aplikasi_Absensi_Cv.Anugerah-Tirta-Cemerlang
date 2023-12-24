@@ -88,6 +88,10 @@ class MemberController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = register::findOrFail($id);
+        if($member) {
+            $member->delete();
+        }
+        return redirect()->back()->with('success','Berhasil Menghapus Member');
     }
 }

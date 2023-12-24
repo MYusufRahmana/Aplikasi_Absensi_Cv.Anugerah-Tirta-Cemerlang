@@ -96,19 +96,9 @@
                                 <td>{{ $item->Nama }}</td>
                                 <td>{{ $item->Sekolah }}</td>
                                 <td>{{ $item->Health }}</td>
-                                @if ($item->Kelas == '1')
-                                    <td>Kelas Pemula - Reguler</td>
-                                @endif
-                                @if ($item->Kelas == '2')
-                                    <td>Kelas Pemula - Group</td>
-                                @endif
-                                @if ($item->Kelas == '3')
-                                    <td>Kelas Pemula - Private</td>
-                                @endif
-                                @if ($item->Kelas == '4')
-                                    <td>Jalur Prestasi</td>
-                                @endif
-                                {{-- <td>{{ $item->Kelas }}</td> --}}
+                                <td>
+                                    {{ $item->Kelas == 1 ? 'Kelas Renang - Pemula' : ($item->Kelas == 2 ? 'Kelas Renang - Group' : ($item->Kelas == 3 ? 'Kelas Pemula - Private' : 'Jalur Prestasi')) }}
+                                </td>
                                 <td>{{ $item->Hp }}</td>
                                 @if ($item->status == 1)
                                     <td>Aktif</td>
@@ -117,8 +107,9 @@
                                 @endif
                                 <td class="">
                                     <a href="{{ route('member.edit', $item->no) }}"><button class="btn btn-warning">Edit</button></a>
-                                    <form action="">
+                                    <form action="{{ route('member.destroy',$item->no) }}" method="POST">
                                         @csrf
+                                        @method('delete')
                                         <input type="submit" value="Hapus" class="btn btn-danger tambah">
                                     </form>
                                 </td>

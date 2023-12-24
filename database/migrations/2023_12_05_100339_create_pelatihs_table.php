@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('t_pelatih', function (Blueprint $table) {
-            $table->unsignedBigInteger('id');
-            $table->primary('id');
+            $table->id();
             $table->string('Nama_Pelatih');
             $table->string('Hp');
             $table->string('Email');
+            $table->string('kelas');
             $table->string('password');
             $table->string('Alamat');
-            $table->string('Username');
             $table->enum('role', ['member', 'pelatih', 'admin']);
             $table->string('status');
             $table->timestamps();

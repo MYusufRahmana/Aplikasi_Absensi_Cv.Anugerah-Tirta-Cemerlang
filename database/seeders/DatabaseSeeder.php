@@ -58,10 +58,10 @@ class DatabaseSeeder extends Seeder
             'id' => '1',
             'Nama_pelatih' => 'Pelatih 1',
             'Hp' => '081277788',
-            'Email' => 'pelatih@gmail.com',
+            'Email' => 'pelatih2@gmail.com',
+            'kelas' => '2',
             'password' => bcrypt('pelatih'),
             'Alamat' => 'jln harapan 1',
-            'Username' => 'pelatih',
             'role' => 'pelatih',
             'status' => 1,
         ]);
@@ -71,9 +71,9 @@ class DatabaseSeeder extends Seeder
             'Nama_pelatih' => 'Pelatih 2',
             'Hp' => '081277788',
             'Email' => 'pelatih2@gmail.com',
+            'kelas' => '2',
             'password' => bcrypt('pelatih'),
             'Alamat' => 'jln harapan 1',
-            'Username' => 'pelatih',
             'role' => 'pelatih',
             'status' => 1,
         ]);

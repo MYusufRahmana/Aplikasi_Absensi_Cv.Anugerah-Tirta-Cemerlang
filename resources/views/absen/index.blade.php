@@ -144,36 +144,61 @@
             <tbody id="presensiTable">
                 <tr>
                     @if (Session::get('member')->Kelas == '1')
-                    Kelas Pemula - Reguler
-                        <p>
-                            Pelatih : Namira
+                        Kelas Pemula - Reguler
+                        <p>Pelatih :
+                            @if ($pelatih1->isEmpty())
+                                -
+                            @else
+                                @foreach ($pelatih1 as $item)
+                                    {{ $item->Nama_Pelatih }},
+                                @endforeach
+                            @endif
                         </p>
-                        @endif
-                        @if (Session::get('member')->Kelas == '2')
+                    @endif
+                    @if (Session::get('member')->Kelas == '2')
                         Kelas Pemula - Group
-                        <p>
-                            Pelatih : Tarmono
+                        <p>Pelatih :
+                            @if ($pelatih2->isEmpty())
+                                -
+                            @else
+                                @foreach ($pelatih2 as $item)
+                                    {{ $item->Nama_Pelatih }},
+                                @endforeach
+                            @endif
                         </p>
                     @endif
                     @if (Session::get('member')->Kelas == '3')
-                    Kelas Pemula - Private
-                    <p>
-                        Pelatih : Nisa / Nurcahya / Darmalela / Ririn / Nazilah / Aji / Agung
-                        </p>
-                        @endif
-                        @if (Session::get('member')->Kelas == '4')
-                        Jalur Prestasi
+                        Kelas Pemula - Private
                         <p>
-                            Pelatih : Alan / Alex / Kiki / Vira
-                            
+                            <p>Pelatih :
+                                @if ($pelatih3->isEmpty())
+                                    -
+                                @else
+                                    @foreach ($pelatih3 as $item)
+                                        {{ $item->Nama_Pelatih }},
+                                    @endforeach
+                                @endif
+                            </p>
                         </p>
-                        @endif
-                    </tr>
-                    @if ($absensi->isEmpty())
+                    @endif
+                    @if (Session::get('member')->Kelas == '4')
+                        Jalur Prestasi
+                        <p>Pelatih :
+                            @if ($pelatih4->isEmpty())
+                                -
+                            @else
+                                @foreach ($pelatih4 as $item)
+                                    {{ $item->Nama_Pelatih }},
+                                @endforeach
+                            @endif
+                        </p>
+                    @endif
+                </tr>
+                @if ($absensi->isEmpty())
                     <tr>
                         <td colspan="4">Silahkan Melakukan Absensi</td>
                     </tr>
-                    @else
+                @else
                     <?php $i = 1; ?>
                     @foreach ($absensi as $item)
                         <tr>

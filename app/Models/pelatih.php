@@ -9,7 +9,8 @@ class pelatih extends Model
 {
     protected $table ="t_pelatih"; 
     protected $guarded =["id"]; 
-    protected $fillable =['Nama_Pelatih','Hp','Email','password','alamat','username','role','status']; 
+    protected $primaryKey ="id"; 
+    protected $fillable =['Nama_Pelatih','Hp','Email','password','Alamat','kelas','Username','role','status']; 
     use HasFactory;
 
     public function absensi_pelatih() {
