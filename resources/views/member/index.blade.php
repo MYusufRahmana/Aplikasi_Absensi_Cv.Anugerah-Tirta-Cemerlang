@@ -13,6 +13,7 @@
                 float: right;
                 margin-right: 3vh
             }
+
             body {
                 font-family: 'Arial', sans-serif;
                 background-color: #f4f4f4;
@@ -62,6 +63,18 @@
             tr:nth-child(even) {
                 background-color: #f9f9f9;
             }
+
+            /* Gaya untuk tombol Edit */
+            .btn-edit {
+                margin-right: 5px;
+                /* Jarak antara tombol Edit dan tombol Hapus */
+            }
+
+            /* Gaya untuk tombol Hapus */
+            .btn-delete {
+                margin-left: 5px;
+                /* Jarak antara tombol Edit dan tombol Hapus */
+            }
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     </head>
@@ -83,22 +96,18 @@
                             <th>Nama Member</th>
                             <th>Sekolah</th>
                             <th>Kesehatan</th>
-                            <th>Kelas</th>
                             <th>No Handphone</th>
                             <th colspan="2">Status</th>
                         </tr>
                     </thead>
                     <tbody id="presensiTable">
-                        <?php $i=1?>
+                        <?php $i = 1; ?>
                         @foreach ($member as $item)
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $item->Nama }}</td>
                                 <td>{{ $item->Sekolah }}</td>
                                 <td>{{ $item->Health }}</td>
-                                <td>
-                                    {{ $item->Kelas == 1 ? 'Kelas Renang - Pemula' : ($item->Kelas == 2 ? 'Kelas Renang - Group' : ($item->Kelas == 3 ? 'Kelas Pemula - Private' : 'Jalur Prestasi')) }}
-                                </td>
                                 <td>{{ $item->Hp }}</td>
                                 @if ($item->status == 1)
                                     <td>Aktif</td>
@@ -106,8 +115,9 @@
                                     <td>Non-Aktif</td>
                                 @endif
                                 <td class="">
-                                    <a href="{{ route('member.edit', $item->no) }}"><button class="btn btn-warning">Edit</button></a>
-                                    <form action="{{ route('member.destroy',$item->no) }}" method="POST">
+                                    <a href="{{ route('member.edit', $item->no) }}"><button
+                                            class="btn btn-warning">Edit</button></a>
+                                    <form action="{{ route('member.destroy', $item->no) }}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <input type="submit" value="Hapus" class="btn btn-danger tambah">

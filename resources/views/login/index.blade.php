@@ -32,7 +32,6 @@
             </div>
             <div class="form-group">
               <div class="d-flex justify-content-between">
-                <a href="#">Forget Password</a>
                 <button type="submit" class="btn btn-primary">Login</button>
               </div>
             </div>

@@ -68,6 +68,11 @@
     .right_col {
         min-height: 93vh;
     }
+    #menu_toggle {
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+}
 </style>
 
 <body class="nav-md">
@@ -99,25 +104,18 @@
                                         @if (Session::has('pelatih'))
                                             {{ Session::get('pelatih')->Nama_Pelatih }}
                                         @endif
+                                        @if (Session::has('superadmin'))
+                                        {{ Session::get('superadmin')->nama }}
+                                    @endif
                                     </span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                                     @if (Session::has('member'))
                                         <li><a href="{{ route('profile.index') }}"> Profile</a></li>
                                     @endif
-                                    {{-- @if (Session::has('admin'))
-                                        <li><a href="{{ route('profileAdmin.index') }}"> Profile</a></li>
-                                    @endif --}}
-                                    {{-- @if (Session::has('pelatih'))
-                                        <li><a href="{{ route('profilePelatih.index') }}"> Profile</a></li>
-                                    @endif --}}
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="javascript:;">Help</a></li>
+                                    @if (Session::has('pelatih'))
+                                        <li><a href="{{ route('profilepelatih.index') }}"> Profile</a></li>
+                                    @endif
                                     <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
@@ -140,11 +138,11 @@
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Total Laki-laki</span>
-                        <div class="count green">{{ $countMaleMembers = DB::table('register')->where('gender', 'Laki-laki')->count() }}</div>
+                        <div class="count green">{{ $countMaleMembers = DB::table('register')->where('gender', 1)->count() }}</div>
                     </div>
                     <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                         <span class="count_top"><i class="fa fa-user"></i> Total Perempuan</span>
-                        <div class="count red">{{ $countMaleMembers = DB::table('register')->where('gender', 'Perempuan')->count() }}</div>
+                        <div class="count red">{{ $countMaleMembers = DB::table('register')->where('gender', 2)->count() }}</div>
                     </div>
                 </div>
                 @yield('content')
@@ -164,6 +162,7 @@
             <!-- /footer content -->
         </div>
     </div>
+
 
     <!-- jQuery -->
     <script src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
@@ -204,7 +203,7 @@
     <script src="{{ asset('vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="{{ asset('build/js/custom.min.js') }}"></script>
+    <script src="{{asset('build/js/custom.min.js')}}"></script>
 
 </body>
 

@@ -39,7 +39,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Waktu</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
                     <th>Kelas</th>
                     <th>Status</th>
                 </tr>
@@ -51,6 +52,7 @@
                         <td>{{ $i++ }}</td>
                         <td>{{ $riwayat->pelatih->Nama_Pelatih }}</td>
                         <td>{{ date('d M Y', strtotime($riwayat->waktu_absen)) }}</td>
+                        <td>{{ date('H:i:s', strtotime($riwayat->waktu_absen)) }}</td>
                         @if ($riwayat->kelas == '1')
                             <td>Kelas Pemula - Reguler</td>
                         @endif

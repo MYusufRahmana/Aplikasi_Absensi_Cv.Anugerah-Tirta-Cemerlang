@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_member;
-use App\Models\RiwayatAbsensiMember;
+use App\Models\AbsensiMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +15,7 @@ class RiwayatAbsenMemberController extends Controller
     public function index()
     {
         $user_id = session()->get('member')->no;
-        $user = RiwayatAbsensiMember::where(['id_user' => $user_id])->get();
+        $user = AbsensiMember::where(['id_user' => $user_id])->get();
         return view('riwayatAbsenMember.index', compact('user'));
     }
 

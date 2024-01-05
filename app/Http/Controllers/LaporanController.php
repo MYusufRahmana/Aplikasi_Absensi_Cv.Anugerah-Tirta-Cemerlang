@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_pelatih;
-use App\Models\riwayatabsensipelatih;
+use App\Models\AbsensiPelatih;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -14,7 +13,7 @@ class LaporanController extends Controller
      */
     public function index()
     {
-        $reqAbsenPelatih=absensi_pelatih::where("status","Menunggu")->get();
+        $reqAbsenPelatih=AbsensiPelatih::where("status","Menunggu")->get();
         return view('laporan.index',[
             'reqAbsen' => $reqAbsenPelatih
         ]);
@@ -57,22 +56,15 @@ class LaporanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $idAbsenPelatih = absensi_pelatih::find($id);
-        $idRiwayatPelatih = riwayatabsensipelatih::find($id);
+        $idAbsenPelatih = AbsensiPelatih::find($id);
         if($request->H) {
             $idAbsenPelatih->update([
-                'status'=>$request->H
-            ]);
-            $idRiwayatPelatih->update([
                 'status'=>$request->H
             ]);
             return Redirect::back()->with('success','Verifikasi Absen Berhasil');
         }
         elseif ($request->B) {
             $idAbsenPelatih->update([
-                'status'=>$request->B
-            ]);
-            $idRiwayatPelatih->update([
                 'status'=>$request->B
             ]);
             return Redirect::back()->with('success','Verifikasi Absen Berhasil');

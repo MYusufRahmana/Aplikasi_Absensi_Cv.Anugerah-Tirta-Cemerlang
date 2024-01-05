@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('kelas');
             $table->string('password');
             $table->string('Alamat');
-            $table->enum('role', ['member', 'pelatih', 'admin']);
+            $table->enum('role', ['member', 'pelatih', 'admin','superadmin']);
             $table->string('status');
             $table->timestamps();
         });

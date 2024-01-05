@@ -33,7 +33,7 @@
                         @if (Session::has('success'))
                         <div class="alert alert-success"> {{session('success') }} </div> 
                         @endif
-                        <h4 class="card-title">Profile Gaji Pelatih</h4>
+                        <h4 class="card-title">Profile Pelatih</h4>
                         <form action="{{ route('pelatih.update',$pelatih->id) }}" class="forms-sample" method="post">
                             @csrf
                             @method('PUT')

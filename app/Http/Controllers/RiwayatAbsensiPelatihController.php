@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_pelatih;
+use App\Models\AbsensiPelatih;
 use App\Models\RiwayatAbsensiPelatih;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class RiwayatAbsensiPelatihController extends Controller
     public function index()
     {
         $user_id = session()->get('pelatih')->id;
-        $user = RiwayatAbsensiPelatih::where(['id_user'=>$user_id])->get();
+        $user = AbsensiPelatih::where(['id_user'=>$user_id])->get();
         return view('riwayatabsenpelatih.index',compact('user'));
     }
 

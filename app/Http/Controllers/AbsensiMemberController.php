@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_member;
-use App\Http\Requests\Storeabsensi_memberRequest;
-use App\Http\Requests\Updateabsensi_memberRequest;
-use App\Models\RiwayatAbsensiMember;
+use App\Models\AbsensiMember;
+use App\Models\KelasMember;
+use App\Models\Pelatih;
 use Carbon\Carbon;
-use DateTime;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
-use League\Flysystem\UnableToRetrieveMetadata;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AbsensiMemberController extends Controller
 {
@@ -22,18 +17,17 @@ class AbsensiMemberController extends Controller
 
     public function index()
     {
-        $user_id = session()->get('member')->no;
-        $absensi = absensi_member::where('id_user', $user_id)->get();
-        $pelatih1 = DB::table('t_pelatih')->where('kelas','1')->get();
-        $pelatih2 = DB::table('t_pelatih')->where('kelas','2')->get();
-        $pelatih3 = DB::table('t_pelatih')->where('kelas','3')->get();
-        $pelatih4 = DB::table('t_pelatih')->where('kelas','4')->get();
+        $id_user = Session::get('member')->no;
+        $absensi = AbsensiMember::whereRelation('kelas_member', 'status', '0')->where('id_user', $id_user)->get();
+        $kelas_member_aktif = KelasMember::where(['id_user' => $id_user, 'status' => '0'])->first();
+        if ($kelas_member_aktif) {
+            $pelatih = Pelatih::where('kelas', $kelas_member_aktif->kelas)->get();
+        }
+
         return view('absen.index', [
-            'absensi'=>$absensi,
-            'pelatih1'=>$pelatih1,
-            'pelatih2'=>$pelatih2,
-            'pelatih3'=>$pelatih3,
-            'pelatih4'=>$pelatih4,
+            'absensi' => $absensi,
+            'kelas_member_aktif' => $kelas_member_aktif,
+            'pelatih' => $pelatih ?? collect(),
         ]);
     }
 
@@ -48,69 +42,38 @@ class AbsensiMemberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Storeabsensi_memberRequest $request)
+    public function store(Request $request)
     {
-        $date = Carbon::now()->format('Y-m-d 00:00:00');
-        $id_user = $request->session()->get('member')->no;
-        $absenCount = absensi_member::where('id_user', $id_user)->count();
-        $kelas = $request->session()->get('member')->Kelas;
+        $id_user = Session::get('member')->no;
         $validate = $request->validate([
             'status' => 'required',
             "keterangan" => 'string',
-
         ]);
-        if (absensi_member::where('id_user', $id_user)->get()->isEmpty()) {
-            absensi_member::create([
+        $check_absensi = AbsensiMember::where('id_user', $id_user)
+            ->whereDate('waktu_absen', now()->toDateString())
+            ->count();
+        if ($check_absensi < 1) {
+            $kelas_member = KelasMember::where(['status' => '0', 'id_user' => $id_user])->first();
+            AbsensiMember::create([
                 "id_user" => $id_user,
-                'kelas' => $request->session()->get('member')->Kelas,
-                "waktu_absen" => now()->format('Y-m-d'),
-                "status" => $request->validate(['status' => 'required'])['status'],
+                'id_kelas_member' => $kelas_member->id,
+                "waktu_absen" => now()->format('Y-m-d H:i:s'),
+                "status" => $validate['status'],
             ]);
-            RiwayatAbsensiMember::create([
-                "id_user" => $id_user,
-                "kelas" => $request->session()->get('member')->Kelas,
-                "waktu_absen" => now()->format('Y-m-d'),
-                "status" => $request->status,
-            ]);
+            if (($kelas_member->kelas == 3 && $kelas_member->count_kehadiran >= 8) || $kelas_member->count_kehadiran >= 12) {
+                $kelas_member->status = '1';
+                $kelas_member->save();
+            }
             return redirect()->route('absen.index')->with('success', "Berhasil Absensi");
         } else {
-            if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
-                return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
-            }
-        }
-
-        if (absensi_member::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
             return redirect()->route('absen.index')->with('warning', 'Anda Sudah Absen Hari ini');
-        } else {
-            // if ($kelas== 3 && $absenCount >= 1) {
-            //     return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
-            // }
-            if ($kelas== 2 && $absenCount >= 1) {
-                                
-                return redirect()->route('absen.index')->with('warning', 'Anda telah mencapai batas akhir dari pelatihan!');
-            }
-            else {
-            absensi_member::create([
-                "id_user" => $id_user,
-                "status" => $request->validate(['status' => 'required'])['status'],
-                'kelas' => $request->session()->get('member')->Kelas,
-                "waktu_absen" => now()->format('Y-m-d'),
-            ]);
-            RiwayatAbsensiMember::create([
-                "id_user" => $id_user,
-                "kelas" => $request->session()->get('member')->Kelas,
-                "waktu_absen" => now()->format('Y-m-d'),
-                "status" => $request->status,
-            ]);
-            }
         }
-        return redirect()->route('absen.index')->with('success', "Berhasil Absensi");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(absensi_member $absensi_member)
+    public function show(AbsensiMember $absensi)
     {
         //
     }
@@ -118,7 +81,7 @@ class AbsensiMemberController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(absensi_member $absensi_member)
+    public function edit(AbsensiMember $absensi)
     {
         //
     }
@@ -126,7 +89,7 @@ class AbsensiMemberController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updateabsensi_memberRequest $request, absensi_member $absensi_member)
+    public function update(Request $request, AbsensiMember $absensi)
     {
         //
     }
@@ -134,7 +97,7 @@ class AbsensiMemberController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(absensi_member $absensi_member)
+    public function destroy(AbsensiMember $absensi)
     {
         //
     }

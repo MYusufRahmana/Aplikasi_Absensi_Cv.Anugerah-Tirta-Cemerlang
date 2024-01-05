@@ -89,7 +89,7 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $item->pelatih->Nama_Pelatih }}</td>
-                            <td>{{ $item->waktu_absen }}</td>
+                            <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
                             @if ($item->kelas == '1')
                                 <td>Kelas Pemula - Reguler</td>
                             @endif

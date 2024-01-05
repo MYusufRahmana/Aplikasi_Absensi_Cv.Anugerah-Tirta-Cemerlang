@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KelasMember;
 use App\Models\register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -61,20 +62,24 @@ class MemberController extends Controller
     {
         // return dd($request);
         $member = register::find($id);
+        $kelas = KelasMember::where('id_user',$id)->where('status',"0")->first();
         $validatedata = request()->validate([
             'Nama'=>'required|string',
             'Sekolah'=>'required|string',
             'Health'=>'required|string',
-            'Kelas'=>'required|string',
+            'kelas'=>'required|string',
         ]);
         if($validatedata) {
             $member->update([
                 'Nama'=>$request->Nama,
                 'Sekolah'=>$request->Sekolah,
                 'Health'=>$request->Health,
-                'Kelas'=>$request->Kelas,
                 'status'=>$request->status,
             ]);
+            $kelas->update([
+                'kelas'=>$request->kelas
+            ]);
+            
             return redirect('/member')->with('success','Berhasil mengubah data');
         }
         else {

@@ -137,7 +137,8 @@
             <tr>
                 <th>No</th>
                 <th>Nama Pelatih</th>
-                <th>Waktu</th>
+                <th>Tanggal</th>
+                <th>Jam</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -156,16 +157,16 @@
                 <td>{{ $i++ }}</td>
                 <td>{{ ($absensi_pelatih->pelatih->Nama_Pelatih)}}</td>
                 <td>{{ date('d M Y', strtotime($absensi_pelatih->waktu_absen)) }}</td>
+                <td>{{ date('H:i:s', strtotime($absensi_pelatih->waktu_absen)) }}</td>
                 <td style="background-color: {{ $absensi_pelatih->status == 'Hadir' ? '#4CAF50' :
-                                                ($absensi_pelatih->status == "Tidak Hadir" ? '#Ff0000' :
-                                                ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00'
+                                                ($absensi_pelatih->status == "Tidak Hadir" ? '#Ff0000' : 
+                                                ($absensi_pelatih->status == 'Menunggu' ? '#Ffff00' 
                                                 : 'transparent')) }}; color: black;">{{ $absensi_pelatih->status }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <!-- Form presensi mandiri -->
     <form action="{{route('absenpelatih.store',Session::get('pelatih')->id)}}" method="post">
         @csrf
         <div class="presensi-form" id="presensiForm">

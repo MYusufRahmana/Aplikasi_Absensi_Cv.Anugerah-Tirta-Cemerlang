@@ -137,7 +137,8 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Waktu</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -153,6 +154,7 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $item->admin->nama}}</td>
                             <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
+                            <td>{{ date('H:i:s', strtotime($item->waktu_absen)) }}</td>
                             <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>
                         </tr>
                     @endforeach

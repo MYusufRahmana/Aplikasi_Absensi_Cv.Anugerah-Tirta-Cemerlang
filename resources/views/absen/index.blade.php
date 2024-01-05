@@ -130,90 +130,56 @@
         @if (Session::has('warning'))
             <div class="alert alert-warning">{{ Session::get('warning') }}</div>
         @endif
-        <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi Mandiri</a>
 
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>Waktu</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="presensiTable">
-                <tr>
-                    @if (Session::get('member')->Kelas == '1')
-                        Kelas Pemula - Reguler
-                        <p>Pelatih :
-                            @if ($pelatih1->isEmpty())
-                                -
-                            @else
-                                @foreach ($pelatih1 as $item)
-                                    {{ $item->Nama_Pelatih }},
-                                @endforeach
-                            @endif
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '2')
-                        Kelas Pemula - Group
-                        <p>Pelatih :
-                            @if ($pelatih2->isEmpty())
-                                -
-                            @else
-                                @foreach ($pelatih2 as $item)
-                                    {{ $item->Nama_Pelatih }},
-                                @endforeach
-                            @endif
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '3')
-                        Kelas Pemula - Private
-                        <p>
-                            <p>Pelatih :
-                                @if ($pelatih3->isEmpty())
-                                    -
-                                @else
-                                    @foreach ($pelatih3 as $item)
-                                        {{ $item->Nama_Pelatih }},
-                                    @endforeach
-                                @endif
-                            </p>
-                        </p>
-                    @endif
-                    @if (Session::get('member')->Kelas == '4')
-                        Jalur Prestasi
-                        <p>Pelatih :
-                            @if ($pelatih4->isEmpty())
-                                -
-                            @else
-                                @foreach ($pelatih4 as $item)
-                                    {{ $item->Nama_Pelatih }},
-                                @endforeach
-                            @endif
-                        </p>
-                    @endif
-                </tr>
-                @if ($absensi->isEmpty())
+        @if ($kelas_member_aktif)
+            <a href="#" class="btn add-btn" onclick="openPresensiForm()"><i class="bi bi-upc-scan"></i> Presensi
+                Mandiri</a>
+
+            <table class="table table-bordered">
+                <thead class="thead-light">
                     <tr>
-                        <td colspan="4">Silahkan Melakukan Absensi</td>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Tanggal</th>
+                        <th>Jam</th>
+                        <th>Status</th>
                     </tr>
-                @else
-                    <?php $i = 1; ?>
-                    @foreach ($absensi as $item)
+                </thead>
+                <tbody id="presensiTable">
+                    <tr>
+                        {{ $kelas_member_aktif->kelas_member_jenis }}
+                        <p>Pelatih :
+                            @foreach ($pelatih as $item)
+                                {{ $item->Nama_Pelatih }},
+                            @endforeach
+                        </p>
+                    </tr>
+                    @if ($absensi->isEmpty())
                         <tr>
-                            <td>{{ $i++ }}</td>
-                            <td>{{ $item->register->Nama }}</td>
-                            <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
-                            <td style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">{{ $item->status }}</td>
+                            <td colspan="4">Silahkan Melakukan Absensi</td>
                         </tr>
-                    @endforeach
-                @endif
-            </tbody>
-        </table>
+                    @else
+                        <?php $i = 1; ?>
+                        @foreach ($absensi as $item)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $item->register->Nama }}</td>
+                                <td>{{ date('d M Y', strtotime($item->waktu_absen)) }}</td>
+                                <td>{{ date('h:i:s', strtotime($item->waktu_absen)) }}</td>
+                                <td
+                                    style="background-color: {{ $item->status == 'Hadir' ? '#4CAF50' : ($item->status == 'Izin' ? '#FFD700' : 'transparent') }}; color: black;">
+                                    {{ $item->status }}</td>
+                            </tr>
+                        @endforeach
+                    @endif
+                </tbody>
+            </table>
+        @else
+            <div class="alert alert-info">Kelas telah selesai!, silahkan hubungi admin jika ingin melanjutkan kelas.</div>
+        @endif
 
         <!-- Form presensi mandiri -->
-        <form action="{{ route('absen.store', Session::get('member')->no) }}" method="post">
+        <form action="{{ route('absen.store') }}" method="post">
             @csrf
             <div class="presensi-form" id="presensiForm">
                 <div class="form-content">

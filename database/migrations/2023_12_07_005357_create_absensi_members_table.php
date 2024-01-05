@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('absensi_member', function (Blueprint $table) {
             $table->increments('id_absensi_member');
-            $table->unsignedBigInteger('id_user');
+            $table->foreignId('id_user');
             $table->foreign('id_user')->references('no')->on('register')->onDelete('cascade');
-            $table->string('kelas');
+            $table->foreignId('id_kelas_member');
+            $table->foreign('id_kelas_member')->references('id')->on('kelas_member');
             $table->datetime('waktu_absen');
             $table->string('status');
             $table->timestamps();

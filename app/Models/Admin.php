@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Admin extends Model
 {
     protected $table = 'admins';
-    protected $guarded= 'id';
-    protected $fillable = ['username','password','nama','hp','role','status'];
+    protected $guarded = 'id';
+    protected $fillable = ['email', 'username', 'password', 'nama', 'hp', 'role', 'status'];
     use HasFactory;
 
-    public function AbsenAdmin() {
-        return $this->belongsTo(AbsenAdmin::class,'id','id_user');
+    public function AbsenAdmin()
+    {
+        return $this->belongsTo(AbsenAdmin::class, 'id', 'id_user');
     }
 }

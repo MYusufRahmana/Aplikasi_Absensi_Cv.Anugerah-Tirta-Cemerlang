@@ -54,17 +54,27 @@
         <thead class="thead-light">
             <tr>
                 <th>No</th>
-                <th>Nama Pelatih</th>
+                <th>Nama</th>
+                <th>Group</th>
+                <th>Regular</th>
+                <th>Private</th>
+                <th>Prestasi</th>
+                <th>Total Kehadiran</th>
                 <th>Total Gaji</th>
             </tr>
         </thead>
         <tbody id="presensiTable">
             @php $i=1 @endphp
-            @foreach ($pelatih as $item)
+            @foreach ($laporan_absensi_pelatih as $item)
                 <tr>
                     <td>{{ $i++ }}</td>
-                    <td>{{ $item->Nama_Pelatih }}</td>
-                    <td>Rp.{{number_format($totalGaji[$item->id] ?? 0, 0, ',', '.') }}</td>
+                    <td>{{ $item->pelatih->Nama_Pelatih }}</td>
+                    <td>{{ $item->jumlah_hadir_kelas_1 }}</td>
+                    <td>{{ $item->jumlah_hadir_kelas_2 }}</td>
+                    <td>{{ $item->jumlah_hadir_kelas_3 }}</td>
+                    <td>{{ $item->jumlah_hadir_kelas_4 }}</td>
+                    <td>{{ $item->total_jumlah_hadir }}</td>
+                    <td>Rp {{ number_format($item->total_gaji, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>

@@ -33,7 +33,7 @@
                         @if (Session::has('success'))
                         <div class="alert alert-success"> {{session('success') }} </div> 
                         @endif
-                        <h4 class="card-title">Profile Gaji Pelatih</h4>
+                        <h4 class="card-title">Profile Member</h4>
                         <form action="{{ route('member.update',$member->no) }}" class="forms-sample" method="post">
                             @csrf
                             @method('PUT')
@@ -56,9 +56,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="Kelas" class="col-sm-3 col-form-label">Kelas</label>
+                                <label for="kelas" class="col-sm-3 col-form-label">Kelas</label>
                                 <div class="col-sm-9">
-                                    <select name="Kelas" id="Kelas" class="form-control form-select">
+                                    <select name="kelas" id="kelas" class="form-control form-select">
                                         <option value="1">Kelas Pemula - Reguler</option>
                                         <option value="2">Kelas Pemula - Group</option>
                                         <option value="3">Kelas Pemula - Private</option>

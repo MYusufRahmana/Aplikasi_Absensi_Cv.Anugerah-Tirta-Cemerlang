@@ -25,9 +25,10 @@ return new class extends Migration
             $table->string('email');
             $table->string('gbr');
             $table->timestamps();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->string('status');
-            $table->enum('role', ['member', 'pelatih', 'admin']);
+            $table->enum('role', ['member', 'pelatih', 'admin','superadmin']);
+
         });
     }
 

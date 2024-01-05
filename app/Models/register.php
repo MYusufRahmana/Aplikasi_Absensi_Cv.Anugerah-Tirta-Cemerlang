@@ -6,15 +6,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class register extends Model
+class Register extends Model
 {
     use HasFactory;
     protected $primaryKey = 'no';
     protected $guarded = "no";
     protected $table = 'register';
-    protected $fillable = ['no','Nama','Gender','Sekolah','Health','Tgl','Kelas','Ortu','Alamat','Hp','email','gbr','password',"status",'role'];
+    protected $fillable = ['no', 'Nama', 'Gender', 'Sekolah', 'Health', 'Tgl', 'Kelas', 'Ortu', 'Alamat', 'Hp', 'email', 'gbr', 'password', "status", 'role'];
 
-    public function riwayatabsensimember() {
-        return $this->belongsTo(riwayatabsensimember::class,'No','id_user');
+    function kelas_member()
+    {
+        return $this->hasMany(KelasMember::class, 'id_user', 'no');
     }
 }

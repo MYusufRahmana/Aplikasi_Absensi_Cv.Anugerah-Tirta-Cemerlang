@@ -2,47 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_member;
+use App\Models\AbsenAdmin;
 use App\Models\absensi_pelatih;
-use App\Models\pelatih;
+use App\Models\AbsensiPelatih;
 use Illuminate\Http\Request;
-
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class PDFController extends Controller
 {
-    public function index () {
-        $pelatih = pelatih::all();
-        $id = absensi_pelatih::get('id_user');
-        $totalGaji = [];
-        foreach ($id as $item) {
-            $id_user= $item->id_user;
-            $hadirKelas1 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','1')->get()->count();
-            $hadirKelas2 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','2')->get()->count();
-            $hadirKelas3 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','3')->get()->count();
-            $hadirKelas4 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','4')->get()->count();
-            $totalGaji[$id_user]=$hadirKelas1*50000+$hadirKelas2*50000+$hadirKelas3*80000+$hadirKelas4*50000;
-        }  
-        return view('laporanpelatih.index',[
-            'pelatih'=>$pelatih,
-            'totalGaji'=>$totalGaji
-        ]);
+    public function index(Request $request)
+    {
+        $tahun_bulan = explode('-', $request->get('tahun_bulan', date('Y-m')));
+        $laporan_absensi_pelatih = AbsensiPelatih::laporan($tahun_bulan);
+        if ($request->get('pdf')) {
+            return PDF::loadview('laporanpelatih.pdf', [
+                'laporan_absensi_pelatih' => $laporan_absensi_pelatih
+            ])->download('Laporan_Pelatih.pdf');
+        } else {
+            return view('laporanpelatih.index', [
+                'laporan_absensi_pelatih' => $laporan_absensi_pelatih,
+            ]);
+        }
     }
 
-    public function cetak_pdf()
+    public function laporan_admin(Request $request)
     {
-    	$pelatih = pelatih::all();
-        $id = absensi_pelatih::get('id_user');
-        $totalGaji = [];
-        foreach ($id as $item) {
-            $id_user= $item->id_user;
-            $hadirKelas1 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','1')->get()->count();
-            $hadirKelas2 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','2')->get()->count();
-            $hadirKelas3 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','3')->get()->count();
-            $hadirKelas4 = absensi_pelatih::where('id_user',$id_user)->where('status','Hadir')->where('kelas','4')->get()->count();
-            $totalGaji[$id_user]=$hadirKelas1*50000+$hadirKelas2*50000+$hadirKelas3*80000+$hadirKelas4*50000;
-        }  
-    	$pdf = PDF::loadview('laporanpelatih.pdf',['pelatih'=>$pelatih,'totalGaji'=>$totalGaji]);
-    	return $pdf->download('Laporan_Pelatih.pdf');
+        $tahun_bulan = explode('-', $request->get('tahun_bulan', date('Y-m')));
+        $laporan_absensi_admin = AbsenAdmin::laporan($tahun_bulan);
+        if ($request->get('pdf')) {
+            return PDF::loadview('laporanadmin.pdf', [
+                'laporan_absensi_admin' => $laporan_absensi_admin
+            ])->download('Laporan_Admin.pdf');
+        } else {
+            return view('laporanadmin.index', [
+                'laporan_absensi_admin' => $laporan_absensi_admin
+            ]);
+        }
     }
 }

@@ -124,24 +124,23 @@
 
     <body>
         <h5>List Kelas</h5>
-        <form action="{{ route('kelasmember.index') }}" method="GET">
-            @csrf
+        <form action="{{ route('kelasmember.index') }}">
             <div class="form-select">
                 <select name="kelas" id="kelas" class="form-control">
-                    <option value="1">Kelas Pemula - Pemula</option>
-                    <option value="2">Kelas Pemula - Group</option>
-                    <option value="3">Kelas Pemula - Private</option>
-                    <option value="4">Jalur Prestasi</option>
+                    <option value="1" {{ request()->get('kelas') == '1' ? 'selected' : '' }}>Kelas Pemula - Pemula
+                    </option>
+                    <option value="2" {{ request()->get('kelas') == '2' ? 'selected' : '' }}>Kelas Pemula - Group
+                    </option>
+                    <option value="3" {{ request()->get('kelas') == '3' ? 'selected' : '' }}>Kelas Pemula - Private
+                    </option>
+                    <option value="4" {{ request()->get('kelas') == '4' ? 'selected' : '' }}>Jalur Prestasi</option>
                 </select>
             </div>
-            <input type="submit" value="Tampilkan" class="btn btn-info" style="float: right; margin-top:1rem; margin-bottom:-1rem;">
+            <a href="{{ route('kelasmember.create') }}" class="btn btn-success" style="float: right; margin-top:1rem">Tambah</a>
+            <input type="submit" value="Tampilkan" class="btn btn-info"
+                style="float: right; margin-top:1rem; margin-bottom:-1rem;">
         </form>
-        {{-- @if (Session::has('success'))
-            <div class="alert alert-success">{{ Session::get('success') }}</div>
-        @endif
-        @if (Session::has('warning'))
-            <div class="alert alert-warning">{{ Session::get('warning') }}</div>
-        @endif --}}
+
 
         <table class="table table-bordered">
             <thead class="thead-light">
@@ -152,36 +151,38 @@
                     <th>Sekolah</th>
                     <th>No.Handphone</th>
                     <th>Kelas</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($kelas->isEmpty())
+                @if ($kelas_member->isEmpty())
                     <tr>
                         <td colspan="6">Silahkan Pilih Kelas</td>
                     </tr>
                 @else
-                <?php $i=1;?>
-                    @foreach ($kelas as $item)
-                        <td>{{ $i++ }}</td>
-                        <td>{{ $item->Nama }}</td>
-                        <td>{{ $item->Gender }}</td>
-                        <td>{{ $item->Sekolah }}</td>
-                        <td>{{ $item->Hp }}</td>
-                        @if ($item->Kelas == 1)
-                            <td>Kelas Pemula - Pemula</td>
-                        @endif
-                        @if ($item->Kelas == 2)
-                            <td>Kelas Pemula - Group</td>
-                        @endif
-                        @if ($item->Kelas == 3)
-                            <td>Kelas Pemula - Private</td>
-                        @endif
-                        @if ($item->Kelas == 4)
-                            <td>Jalur Prestasi</td>
-                        @endif
+                    <?php $i = 1; ?>
+                    @foreach ($kelas_member as $item)
+                        <tr>
+                            <td>{{ $i++ }}</td>
+                            <td>{{ $item->member->Nama }}</td>
+                            <td>{{ $item->member->Gender ==1 ?"Laki-Laki":"Perempuan"}}</td>
+                            <td>{{ $item->member->Sekolah }}</td>
+                            <td>{{ $item->member->Hp }}</td>
+                            @if ($item->kelas == 1)
+                                <td>Kelas Pemula - Pemula</td>
+                            @elseif ($item->kelas == 2)
+                                <td>Kelas Pemula - Group</td>
+                            @elseif ($item->kelas == 3)
+                                <td>Kelas Pemula - Private</td>
+                            @elseif ($item->kelas == 4)
+                                <td>Jalur Prestasi</td>
+                            @endif
+                            <td>
+                                {{ $item->status == "1" ? "Selesai" : "Berjalan" }}
+                            </td>
+                        <tr>
                     @endforeach
                 @endif
-                <tr>
             </tbody>
         </table>
     </body>

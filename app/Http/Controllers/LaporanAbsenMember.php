@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_member;
-use App\Models\register;
+use App\Models\AbsensiMember;
+use App\Models\KelasMember;
+use App\Models\Register;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -14,19 +15,27 @@ class LaporanAbsenMember extends Controller
      */
     public function index()
     {
-        $member = register::get();
-        $idAbsenMember = absensi_member::get('id_user');
-        $absenCounts = [];
+        $kelas_member = [
+            'kelas_1' => [
+                'title' => "Kelas Pemula - Group",
+                'data' => KelasMember::where('kelas', '1')->get()
+            ],
+            'kelas_2' => [
+                'title' => "Kelas Pemula - Regular",
+                'data' => KelasMember::where('kelas', '2')->get()
+            ],
+            'kelas_3' => [
+                'title' => "Kelas Pemula - Private",
+                'data' => KelasMember::where('kelas', '3')->get()
+            ],
+            'kelas_4' => [
+                'title' => "Jalur Prestasi",
+                'data' => KelasMember::where('kelas', '4')->get()
+            ],
+        ];
 
-        foreach ($idAbsenMember as $item) {
-            $id=$item->id_user;
-            $absenCount = absensi_member::where('id_user', $id)
-                ->whereBetween('kelas', [1, 4])->get()->count();
-            $absenCounts[$id] = $absenCount;
-        }
         return view('laporanabsenmember.index', [
-            'member' => $member,
-            'absenCounts' => $absenCounts,
+            'kelas_member' => $kelas_member,
         ]);
     }
 
@@ -35,18 +44,28 @@ class LaporanAbsenMember extends Controller
      */
     public function create()
     {
-        $member = register::get();
-        $idAbsenMember = absensi_member::get('id_user');
-        $absenCounts = [];
+        $kelas_member = [
+            'kelas_1' => [
+                'title' => "Kelas Pemula - Group",
+                'data' => KelasMember::where('kelas', '1')->get()
+            ],
+            'kelas_2' => [
+                'title' => "Kelas Pemula - Regular",
+                'data' => KelasMember::where('kelas', '2')->get()
+            ],
+            'kelas_3' => [
+                'title' => "Kelas Pemula - Private",
+                'data' => KelasMember::where('kelas', '3')->get()
+            ],
+            'kelas_4' => [
+                'title' => "Jalur Prestasi",
+                'data' => KelasMember::where('kelas', '4')->get()
+            ],
+        ];
 
-        foreach ($idAbsenMember as $item) {
-            $id=$item->id_user;
-            $absenCount = absensi_member::where('id_user', $id)
-                ->whereBetween('kelas', [1, 4])->get()->count();
-            $absenCounts[$id] = $absenCount;
-        }
-
-        $pdf = PDF::loadview('laporanabsenmember.pdf', ['member' => $member,'absenCounts'=>$absenCounts]);
+        $pdf = PDF::loadview('laporanabsenmember.pdf', [
+            'kelas_member' => $kelas_member,
+        ]);
         return $pdf->download('Laporan_Member.pdf');
     }
 

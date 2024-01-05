@@ -19,34 +19,31 @@
 
     <body>
         <h4 style="margin-bottom:2rem">Laporan Kelas Member</h4>
-        <a href="{{ route('laporanabsenmember.create') }}" class="btn btn-primary" style="float: right; padding:1rem;">Cetak PDF</a>
-        @foreach([1, 2, 3, 4] as $kelas)
-        <h5>Kelas Pemula - {{ $kelas == 4 ? 'Jalur Prestasi' : ($kelas == 3 ? 'Private' : ($kelas == 2 ? 'Group' : 'Reguler')) }}</h5>
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Nama Member</th>
-                    <th>Sekolah</th>
-                    <th>Status</th>
-                    <th>Kelas</th>
-                    <th>Jumlah Kehadiran</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($member as $item)
-                    @if ($item->Kelas == $kelas)
+        <a href="{{ route('laporanabsenmember.create') }}" class="btn btn-primary" style="float: right; padding:1rem;">Cetak
+            PDF</a>
+        @foreach ($kelas_member as $km)
+            <h5>{{ $km['title'] }}</h5>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Nama Member</th>
+                        <th>Sekolah</th>
+                        <th>Status</th>
+                        <th>Jumlah Kehadiran</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($km['data'] as $item)
                         <tr>
-                            <td>{{ $item->Nama }}</td>
-                            <td>{{ $item->Sekolah }}</td>
-                            <td>{{ $item->status == '1' ? 'Aktif' : '' }}</td>
-                            <td>{{ $kelas == 4 ? 'Jalur Prestasi' : ($kelas == 3 ? 'Private' : ($kelas == 2 ? 'Group' : 'Reguler')) }}</td>
-                            <td>{{ $absenCounts[$item->no] ?? 0  }}</td>
+                            <td>{{ $item->member->Nama }}</td>
+                            <td>{{ $item->member->Sekolah }}</td>
+                            <td>{{ $item->member->status == '1' ? 'Aktif' : '' }}</td>
+                            <td>{{ $item->count_kehadiran }}</td>
                         </tr>
-                    @endif
-                @endforeach
-            </tbody>
-        </table>
-    @endforeach
+                    @endforeach
+                </tbody>
+            </table>
+        @endforeach
     </body>
 
     </html>

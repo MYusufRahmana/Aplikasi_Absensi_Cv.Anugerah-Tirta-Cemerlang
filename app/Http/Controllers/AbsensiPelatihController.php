@@ -2,23 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\absensi_pelatih;
-use App\Http\Requests\Storeabsensi_pelatihRequest;
-use App\Http\Requests\Updateabsensi_pelatihRequest;
-use App\Models\RiwayatAbsensiPelatih;
+use App\Models\AbsensiPelatih;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class AbsensiPelatihController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
+    public function index()
+    {
         $user_id = session()->get('pelatih')->id;
-        $absensi = absensi_pelatih::where('id_user', $user_id)->get();
-        return view ('absenPelatih.index',compact('absensi'));
+        $absensi = AbsensiPelatih::where('id_user', $user_id)->get();
+        return view('absenPelatih.index', compact('absensi'));
     }
 
     /**
@@ -34,47 +31,31 @@ class AbsensiPelatihController extends Controller
      */
     public function store(Request $request)
     {
-        $date = Carbon::now()->format('Y-m-d 00:00:00');
         $id_user = $request->session()->get('pelatih')->id;
-        $validate = $request ->validate([
-            'kelas'=>'required',
-            "keterangan" =>'string',
+        $request->validate([
+            'kelas' => 'required',
+            "keterangan" => 'string',
 
         ]);
-        if(absensi_pelatih::where('id_user', $id_user)->get()->isEmpty()) {
-            absensi_pelatih::create([
-                "id_user" =>$id_user,
-                "kelas" =>$request->kelas,
-                "waktu_absen" => now()->format('Y-m-d'),
-                "status" =>"Menunggu",
+        if (AbsensiPelatih::where('id_user', $id_user)->get()->isEmpty()) {
+            AbsensiPelatih::create([
+                "id_user" => $id_user,
+                "kelas" => $request->kelas,
+                "waktu_absen" => now()->format('Y-m-d H:i:s'),
+                "status" => "Menunggu",
             ]);
-            RiwayatAbsensiPelatih::create([
-                "id_user" =>$id_user,
-                "waktu_absen" => now()->format('Y-m-d'),
-                "kelas" =>$request->kelas,
-                "status" =>"Menunggu",
-            ]);
-            return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );
-        }
-        else {
-            if (absensi_pelatih::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
+            return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen");
+        } else {
+            if (AbsensiPelatih::where('id_user', $id_user)->whereDate('waktu_absen', now()->toDateString())->exists()) {
                 return redirect()->route('absenpelatih.index')->with('warning', 'Anda Sudah Mengajukan Absen Hari ini');
-            }
-            else {
-                absensi_pelatih::create([
-                    "id_user" =>$id_user,
-                    "kelas" =>$request->kelas,
-                    "waktu_absen" => now()->format('Y-m-d'),
-                    "status" =>"Menunggu",
+            } else {
+                AbsensiPelatih::create([
+                    "id_user" => $id_user,
+                    "kelas" => $request->kelas,
+                    "waktu_absen" => now()->format('Y-m-d H:i:s'),
+                    "status" => "Menunggu",
                 ]);
-                RiwayatAbsensiPelatih::create([
-                    "id_user" =>$id_user,
-                    "waktu_absen" => now()->format('Y-m-d'),
-                    "kelas" =>$request->kelas,
-                    "status" =>"Menunggu",
-                ]);
-                return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen" );
-
+                return redirect()->route('absenpelatih.index')->with('success', "Berhasil Mengajukan Absen");
             }
         }
     }
@@ -82,7 +63,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(absensi_pelatih $absensi_pelatih)
+    public function show(AbsensiPelatih $absensi_pelatih)
     {
         //
     }
@@ -90,7 +71,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(absensi_pelatih $absensi_pelatih)
+    public function edit(AbsensiPelatih $absensi_pelatih)
     {
         //
     }
@@ -98,7 +79,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Updateabsensi_pelatihRequest $request, absensi_pelatih $absensi_pelatih)
+    public function update(Request $request, AbsensiPelatih $absensi_pelatih)
     {
         //
     }
@@ -106,7 +87,7 @@ class AbsensiPelatihController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(absensi_pelatih $absensi_pelatih)
+    public function destroy(AbsensiPelatih $absensi_pelatih)
     {
         //
     }

@@ -53,7 +53,7 @@ class PelatihController extends Controller
             'role'=>"pelatih",
         ]);
         return redirect('pelatih')->with('success',"Berhasil Menambah Akun Pelatih");
-        
+
     }
 
     /**
@@ -85,14 +85,14 @@ class PelatihController extends Controller
 
         $validatedData=$request->validate([
             'status'=>'required|string',
-            'kelas'=>"required" 
+            'kelas'=>"required"
          ]);
          if($validatedData) {
              $pelatih->update([
                  'status'=>$status,
                  'kelas'=>$request->kelas
              ]);
-             return redirect('/pelatih')->with('success',"Gaji Telah Diperbarui");
+             return redirect('/pelatih')->with('success',"Data Telah Diperbarui");
          }
     }
 

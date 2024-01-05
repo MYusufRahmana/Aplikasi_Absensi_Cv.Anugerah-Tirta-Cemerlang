@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\pelatih;
-use App\Models\register;
-use Illuminate\Auth\Events\Registered;
+use App\Models\Pelatih;
+use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -27,10 +25,10 @@ class LoginController extends Controller
 
         if ($credentials) {
             $user = null;
-            if (register::where(['email' => $request->email])->first()) {
-                $user = register::where(['email' => $request->email])->first();
-            } elseif (pelatih::where(['email' => $request->email])->first()) {
-                $user = pelatih::where(['email' => $request->email])->first();
+            if (Register::where(['email' => $request->email])->first()) {
+                $user = Register::where(['email' => $request->email])->first();
+            } else if (Pelatih::where(['email' => $request->email])->first()) {
+                $user = Pelatih::where(['email' => $request->email])->first();
             } else {
                 $user = Admin::where(['email' => $request->email])->first();
             };
@@ -53,6 +51,9 @@ class LoginController extends Controller
                             if ($user->role == "admin") {
                                 Session::put('admin', $user);
                             }
+                            if ($user->role == "superadmin") {
+                                Session::put('superadmin', $user);
+                            }
                         }
                         return redirect('/dashboard');
                     };
@@ -63,6 +64,7 @@ class LoginController extends Controller
             }
         }
     }
+
     public function logout()
     {
         Session::flush();

@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="Alamat" class="col-sm-3 col-form-label">Kelas:</label>
+                                <label for="kelas" class="col-sm-3 col-form-label">Kelas:</label>
 
                                 <div class="col-sm-9">
                                     <select name="kelas" id="" class=" form-control">
@@ -66,25 +66,24 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="Email" class="col-sm-3 col-form-label">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="Email" value="" name ="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password" class="col-sm-3 col-form-label">Password:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="password" value="" name ="password">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success mr-2">Submit</button>
+                            <a href="{{ url('/pelatih') }}" class="btn btn-warning">Cancel</a>
+                        </form>
                     </div>
-                    <div class="form-group row">
-                        <label for="Email" class="col-sm-3 col-form-label">Email:</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="Email" value="" name ="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-sm-3 col-form-label">Password:</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" value="" name ="password">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="{{ url('/pelatih') }}" class="btn btn-warning">Cancel</a>
-                    </form>
                 </div>
             </div>
-        </div>
         </div>
         </div>
     </body>
